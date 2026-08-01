@@ -1,0 +1,167 @@
+/* ======================================================
+   HeroVerse AI
+   Layout Global
+   Mobile First
+====================================================== */
+
+/* ==========================================
+   Reset
+========================================== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ==========================================
+   HTML
+========================================== */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+/* ==========================================
+   Body
+========================================== */
+body {
+  min-height: 100vh;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+/* ==========================================
+   Imágenes
+========================================== */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ==========================================
+   Enlaces
+========================================== */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ==========================================
+   Listas
+========================================== */
+ul {
+  list-style: none;
+}
+
+/* ==========================================
+   Botones
+========================================== */
+button {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ==========================================
+   Contenedor principal
+========================================== */
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+.header {
+  background: var(--color-surface);
+  padding: var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* ==========================================
+   Logo
+========================================== */
+.logo {
+  text-align: center;
+}
+
+.logo h1 {
+  font-family: var(--font-title);
+  font-size: var(--fs-xl);
+  color: var(--color-primary);
+}
+
+.logo span {
+  display: block;
+  margin-top: .25rem;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-sm);
+}
+
+/* ==========================================
+   Navegación
+========================================== */
+.navigation {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+}
+
+.navigation a {
+  color: var(--color-text);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.navigation a:hover {
+  color: var(--color-secondary);
+}
+
+/* ==========================================
+   MAIN
+========================================== */
+main {
+  flex: 1;
+  padding: var(--space-xl);
+}
+
+/* ==========================================
+   Sección bienvenida
+========================================== */
+.welcome {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  text-align: center;
+}
+
+.welcome h2 {
+  font-family: var(--font-title);
+  color: var(--color-primary);
+  font-size: var(--fs-xl);
+}
+
+.welcome p {
+  color: var(--color-text-secondary);
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+.footer {
+  padding: var(--space-lg);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: var(--fs-sm);
+}
