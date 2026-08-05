@@ -22,11 +22,9 @@ import { aboutView } from "../views/aboutView.js";
  * Renderiza la vista correspondiente según la URL.
  */
 export function router() {
-  // Contenedor principal de la aplicación
   const app = document.getElementById("app");
-
-  // Ruta actual del navegador
   const path = window.location.pathname;
+  
   console.log("📍 Ruta actual:", path);
 
   switch (path) {
@@ -50,6 +48,44 @@ export function router() {
           <p>Página no encontrada.</p>
         </section>
       `;
-      break;
   }
+}
+
+/**
+ * ==========================================================
+ * Cambia la URL sin recargar la página.
+ * ==========================================================
+ */
+export function navigate(path) {
+  history.pushState({}, "", path);
+  router();
+}
+
+/**
+ * ==========================================================
+ * Inicializa el Router.
+ * ==========================================================
+ */
+export function initRouter() {
+  /*
+   * Captura todos los enlaces internos
+   */
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest("[data-link]");
+
+    if (!link) return;
+
+    event.preventDefault();
+    navigate(link.getAttribute("href"));
+  });
+
+  /*
+   * Detecta Back y Forward (Botones de Atrás/Adelante del navegador)
+   */
+  window.addEventListener("popstate", router);
+
+  /*
+   * Primera carga
+   */
+  router();
 }

@@ -1,45 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- ========================= -->
+  <!-- ===================================== -->
   <!-- Configuración básica -->
-  <!-- ========================= -->
+  <!-- ===================================== -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HeroVerse AI</title>
   <meta name="description" content="Chatea con personajes icónicos usando Inteligencia Artificial.">
 
-  <!-- ========================= -->
-  <!-- Tipografía -->
-  <!-- ========================= -->
+  <!-- ===================================== -->
+  <!-- Google Fonts -->
+  <!-- ===================================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <!-- ========================= -->
-  <!-- CSS principal -->
-  <!-- ========================= -->
-  <link rel="stylesheet" href="./src/styles/main.css">
+  <!-- ===================================== -->
+  <!-- Estilos -->
+  <!-- ===================================== -->
+  <!--link rel="stylesheet" href="/src/styles/main.css"-->
+  
 </head>
 <body>
 
   <div class="app-container">
 
+    <!-- ===================================== -->
+    <!-- Header -->
+    <!-- ===================================== -->
     <header class="header">
-   
+      <div class="logo">
+        <h1>HeroVerse AI</h1>
+      </div>
+
+      <!-- ========================= -->
+      <!-- Navegación SPA -->
+      <!-- ========================= -->
+      <nav class="navbar">
+        <a href="/home" data-link>Home</a>
+        <a href="/chat" data-link>Chat</a>
+        <a href="/about" data-link>About</a>
+      </nav>
     </header>
+
+    <!-- ===================================== -->
+    <!-- Aquí se renderizan todas las vistas -->
+    <!-- ===================================== -->
     <main id="app">
     </main>
-    <footer class="footer">
-     <p>
-        © 2026 HeroVerse AI | Desarrollado por Freddy Tavera
-    </p>
 
+    <!-- ===================================== -->
+    <!-- Footer -->
+    <!-- ===================================== -->
+    <footer class="footer">
+      <p>© 2026 HeroVerse AI | Desarrollado por Freddy Tavera</p>
     </footer>
 
   </div>
 
-  <script type="module" src="/src/app.js"></script>
+  <!-- ===================================== -->
+  <!-- Punto de entrada de JavaScript -->
+  <!-- ===================================== -->
+  <script type="module" src="/src/main.js"></script>
 
 </body>
 </html>
