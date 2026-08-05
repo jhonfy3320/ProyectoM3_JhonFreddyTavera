@@ -1,5 +1,5 @@
 import "./styles/main.css";
-import { initRouter } from "./js/router/router.js";
+import { initRouter } from "./router/router.js";
 /**
  * ==========================================
  * HeroVerse AI
