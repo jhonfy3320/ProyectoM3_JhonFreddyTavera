@@ -12,6 +12,7 @@
  * ✔ Preparar el flujo para integrar Gemini.
  * ==========================================================
  */
+import { generateResponse } from "./chatEngine.js";
 import { addMessage } from "./chatStore.js";
 import {
   renderChat,
@@ -49,30 +50,27 @@ function handleSubmit(event) {
   renderChat();
   input.value = "";
 
-  simulateAIResponse(text);
+  generateAssistantMessage(text);
 }
 
 /**
- * Simula una respuesta de la IA.
+ * Solicita una respuesta al Chat Engine.
  */
-function simulateAIResponse(userMessage) {
-  showTypingIndicator();
+async function generateAssistantMessage(userMessage) {
 
-  setTimeout(() => {
+    showTypingIndicator();
+
+    const response = await generateResponse(userMessage);
+
     hideTypingIndicator();
 
     addMessage({
-      role: "assistant",
-      content: generateFakeResponse(userMessage)
+
+        role: "assistant",
+
+        content: response
+
     });
 
     renderChat();
-  }, 1500);
-}
-
-/**
- * Respuestas temporales.
- */
-function generateFakeResponse(message) {
-  return `Interesante... Has dicho: "${message}". Muy pronto responderé utilizando Gemini AI.`;
 }

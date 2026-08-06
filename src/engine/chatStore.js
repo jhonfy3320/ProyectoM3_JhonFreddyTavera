@@ -37,14 +37,17 @@ const messages = [];
 
 /**
  * ==========================================================
- * Agrega un nuevo mensaje al historial.
+ * Agrega un mensaje al historial.
  * ==========================================================
+ *
+ * @param {Object} message
+ * @param {"user"|"assistant"} message.role
+ * @param {string} message.content
  */
-export function addMessage(role, content) {
-  messages.push({
-    role,
-    content
-  });
+export function addMessage(message) {
+
+    messages.push(message);
+
 }
 
 /**
