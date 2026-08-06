@@ -44,8 +44,40 @@ export function renderChat() {
 /**
  * Mantiene el scroll siempre en el último mensaje.
  */
+/**
+ * Muestra el indicador "Escribiendo..."
+ */
+export function showTypingIndicator() {
+  const container = document.getElementById("messages");
+
+  if (!container) return;
+
+  container.innerHTML += `
+    <article id="typing-indicator" class="message message-ai">
+      <div class="message-avatar">
+        🤖
+      </div>
+      <div class="message-content">
+        <header class="message-header">
+          <strong>Sherlock Holmes</strong>
+        </header>
+        <p class="typing">
+          Escribiendo...
+        </p>
+      </div>
+    </article>
+  `;
+
+  scrollToBottom(container);
+}
+
+/**
+ * Oculta el indicador.
+ */
+export function hideTypingIndicator() {
+  document.getElementById("typing-indicator")?.remove();
+}
+
 function scrollToBottom(container) {
-
-    container.scrollTop = container.scrollHeight;
-
+  container.scrollTop = container.scrollHeight;
 }

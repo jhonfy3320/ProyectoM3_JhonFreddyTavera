@@ -13,7 +13,11 @@
  * ==========================================================
  */
 import { addMessage } from "./chatStore.js";
-import { renderChat } from "../ui/chatRenderer.js";
+import {
+  renderChat,
+  showTypingIndicator,
+  hideTypingIndicator
+} from "../ui/chatRenderer.js";
 
 /**
  * Inicializa el controlador del chat.
@@ -26,9 +30,8 @@ export function initChatController() {
 
   form.addEventListener("submit", handleSubmit);
 }
-
 /**
- * Maneja el envío del formulario.
+ * Envía un mensaje.
  */
 function handleSubmit(event) {
   event.preventDefault();
@@ -38,27 +41,38 @@ function handleSubmit(event) {
 
   if (!text) return;
 
-  addUserMessage(text);
-  input.value = "";
-}
-
-/**
- * Agrega el mensaje del usuario.
- */
-function addUserMessage(content) {
   addMessage({
     role: "user",
-    content
+    content: text
   });
 
   renderChat();
+  input.value = "";
 
-  /*
-   * Próximamente:
-   *
-   * await generateAIResponse(content);
-   *
-   * Aquí conectaremos Gemini sin modificar
-   * el resto de la arquitectura.
-   */
+  simulateAIResponse(text);
+}
+
+/**
+ * Simula una respuesta de la IA.
+ */
+function simulateAIResponse(userMessage) {
+  showTypingIndicator();
+
+  setTimeout(() => {
+    hideTypingIndicator();
+
+    addMessage({
+      role: "assistant",
+      content: generateFakeResponse(userMessage)
+    });
+
+    renderChat();
+  }, 1500);
+}
+
+/**
+ * Respuestas temporales.
+ */
+function generateFakeResponse(message) {
+  return `Interesante... Has dicho: "${message}". Muy pronto responderé utilizando Gemini AI.`;
 }
