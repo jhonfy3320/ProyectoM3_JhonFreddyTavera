@@ -15,7 +15,14 @@
  * ==========================================================
  */
 
+ import { initChatController } from "../engine/chatController.js";
+
 export function chatView() {
+
+    setTimeout(() => {
+        initChatController();
+    });
+
   return `
     <section class="chat-view">
 
@@ -23,16 +30,9 @@ export function chatView() {
       <!-- Encabezado del Chat -->
       <!-- ===================================== -->
       <header class="chat-header">
-        <div class="chat-character">
-          <div class="avatar-container">
-            🕵️
-          </div>
-          <div>
-            <h2>Sherlock Holmes</h2>
-            <span class="badge">En línea</span>
-          </div>
-        </div>
-      </header>
+          <h2>💬 Chat</h2>
+          <p>Comienza una conversación con tu personaje favorito.</p>
+      </header>>
 
       <!-- ===================================== -->
       <!-- Conversación -->
@@ -47,25 +47,33 @@ export function chatView() {
       <!-- ===================================== -->
       <!-- Estado del Chat -->
       <!-- ===================================== -->
-      <section class="chat-status">
-        <span id="typingIndicator">Esperando mensaje...</span>
+      <section
+          id="messages"
+          class="messages">
       </section>
+
 
       <!-- ===================================== -->
       <!-- Área de escritura -->
       <!-- ===================================== -->
-      <footer class="chat-input-area">
-        <textarea
-          id="messageInput"
-          class="input"
-          placeholder="Escribe tu mensaje..."
-          rows="3"
-        ></textarea>
-        <button id="sendButton" class="btn btn-primary">
-          Enviar
-        </button>
-      </footer>
+               <form
+                id="chat-form"
+                class="chat-form">
 
-    </section>
+                <textarea
+                    id="chat-input"
+                    placeholder="Escribe un mensaje..."
+                    rows="3">
+                </textarea>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+                    Enviar
+                </button>
+
+            </form>
+
+        </section>
   `;
 }
