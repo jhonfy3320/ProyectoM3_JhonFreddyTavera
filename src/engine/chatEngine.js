@@ -16,7 +16,7 @@
  * Solamente pedirá una respuesta al Engine.
  * ==========================================================
  */
-
+import { getMessages } from "./chatStore.js";
 import { sendMessage } from "../services/geminiService.js";
 
 /**
@@ -25,9 +25,14 @@ import { sendMessage } from "../services/geminiService.js";
  * @param {string} userMessage
  * @returns {Promise<string>}
  */
-export async function generateResponse(userMessage) {
-    const response = await sendMessage(userMessage);
+/**
+ * Obtiene la respuesta del asistente.
+ */
+export async function generateResponse() {
+    const messages = getMessages();
+    const response = await sendMessage(messages);
     return response;
+
 }
 
 /**

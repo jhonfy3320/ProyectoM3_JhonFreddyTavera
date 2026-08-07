@@ -60,7 +60,7 @@ async function generateAssistantMessage(userMessage) {
 
     showTypingIndicator();
 
-    const response = await generateResponse(userMessage);
+    const response = await generateResponse();
 
     hideTypingIndicator();
 
