@@ -57,18 +57,27 @@ function handleSubmit(event) {
  * Solicita una respuesta al Chat Engine.
  */
 async function generateAssistantMessage(userMessage) {
+  showTypingIndicator();
 
-    showTypingIndicator();
-
+  try {
     const response = await generateResponse();
-
-    hideTypingIndicator();
 
     addMessage({
       role: "assistant",
       content: response.content
-
     });
 
     renderChat();
+  } catch (error) {
+    console.error("Error al generar respuesta:", error);
+
+    addMessage({
+      role: "assistant",
+      content: `⚠️ ${error.message}`
+    });
+
+    renderChat();
+  } finally {
+    hideTypingIndicator();
+  }
 }
