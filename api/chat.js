@@ -134,6 +134,8 @@ export default async function handler(request, response) {
  *   ]
  * }
  */
+console.log("📨 Historial recibido:", JSON.stringify(messages, null, 2));
+
 const contents = messages
   .filter((message) => {
     return (
@@ -150,6 +152,11 @@ const contents = messages
       },
     ],
   }));
+
+  console.log(
+  "🧠 Historial transformado para Gemini:",
+  JSON.stringify(contents, null, 2)
+);
 
 /**
  * Validamos que después de la transformación
@@ -184,16 +191,31 @@ const text = result.text;
       role: "model",
       content: text,
     });
-  } catch (error) {
-    /**
-     * ======================================================
-     * 8. Manejo seguro de errores
-     * ======================================================
-     */
-    console.error("Error en /api/chat:", error);
+    } catch (error) {
+  console.error("Error en /api/chat:", error);
 
-    return response.status(500).json({
-      error: "No fue posible obtener una respuesta de la IA.",
+  const status = error?.status || 500;
+
+  if (status === 429) {
+    return response.status(429).json({
+      error: "El servicio de IA está temporalmente saturado. Intenta nuevamente en unos segundos.",
     });
   }
+
+  if (status === 503) {
+    return response.status(503).json({
+      error: "El servicio de IA está temporalmente no disponible. Intenta nuevamente en unos segundos.",
+    });
+  }
+
+  if (status === 400) {
+    return response.status(400).json({
+      error: "Gemini rechazó la solicitud enviada.",
+    });
+  }
+
+  return response.status(500).json({
+    error: "No fue posible obtener una respuesta de la IA.",
+  });
+}
 }

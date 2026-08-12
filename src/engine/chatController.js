@@ -82,22 +82,17 @@ async function generateAssistantMessage(userMessage) {
     renderChat();
 
   } catch (error) {
-    console.error("Error al generar respuesta:", error);
+  console.error("Error al generar respuesta:", error);
 
-    chatState = "error";
+  chatState = "error";
 
-    addMessage({
-      role: "assistant",
-      content: `⚠️ ${error.message}`
-    });
+  renderChat();
 
-    renderChat();
+} finally {
+  hideTypingIndicator();
 
-  } finally {
-    hideTypingIndicator();
-
-    if (chatState === "success" || chatState === "error") {
-      chatState = "idle";
-    }
+  if (chatState === "success" || chatState === "error") {
+    chatState = "idle";
   }
+}
 }
