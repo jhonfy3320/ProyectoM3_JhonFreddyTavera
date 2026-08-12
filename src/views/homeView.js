@@ -14,7 +14,7 @@
  * - Botón para comenzar el chat.
  * ==========================================================
  */
-
+import { CharacterSelector } from "../characters/CharacterSelector.js";
 export function homeView() {
   return `
     <section class="home-view">
