@@ -20,6 +20,8 @@ import {
   hideTypingIndicator
 } from "../ui/chatRenderer.js";
 
+let chatState = "idle";
+
 /**
  * Inicializa el controlador del chat.
  */
@@ -57,19 +59,32 @@ function handleSubmit(event) {
  * Solicita una respuesta al Chat Engine.
  */
 async function generateAssistantMessage(userMessage) {
+  chatState = "loading";
+
   showTypingIndicator();
 
   try {
     const response = await generateResponse();
+
+    if (!response || typeof response.content !== "string") {
+      throw new Error(
+        "La respuesta del asistente no tiene un formato válido."
+      );
+    }
 
     addMessage({
       role: "assistant",
       content: response.content
     });
 
+    chatState = "success";
+
     renderChat();
+
   } catch (error) {
     console.error("Error al generar respuesta:", error);
+
+    chatState = "error";
 
     addMessage({
       role: "assistant",
@@ -77,7 +92,12 @@ async function generateAssistantMessage(userMessage) {
     });
 
     renderChat();
+
   } finally {
     hideTypingIndicator();
+
+    if (chatState === "success" || chatState === "error") {
+      chatState = "idle";
+    }
   }
 }
