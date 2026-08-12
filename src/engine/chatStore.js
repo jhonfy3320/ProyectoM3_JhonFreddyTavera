@@ -33,46 +33,94 @@
  *   content: "texto"
  * }
  */
+import { characters } from "../characters/characters.js";
+
+
 const messages = [];
 
 /**
  * ==========================================================
- * Agrega un mensaje al historial.
+ * Estado del personaje
  * ==========================================================
+ *
+ * Sherlock Holmes será el personaje inicial.
+ */
+
+let activeCharacterId = "sherlock";
+
+/**
+ * ==========================================================
+ * Mensajes
+ * ==========================================================
+ */
+
+/**
+ * Agrega un mensaje al historial.
  *
  * @param {Object} message
  * @param {"user"|"assistant"} message.role
  * @param {string} message.content
  */
 export function addMessage(message) {
-
-    messages.push(message);
-
+  messages.push(message);
 }
 
 /**
- * ==========================================================
  * Devuelve una copia del historial.
- * ==========================================================
  */
 export function getMessages() {
   return [...messages];
 }
 
 /**
- * ==========================================================
  * Elimina todos los mensajes.
- * ==========================================================
  */
 export function clearMessages() {
   messages.length = 0;
 }
 
 /**
- * ==========================================================
  * Indica si existen mensajes almacenados.
- * ==========================================================
  */
 export function hasMessages() {
   return messages.length > 0;
+}
+
+/**
+ * ==========================================================
+ * Personaje activo
+ * ==========================================================
+ */
+
+/**
+ * Establece el personaje activo.
+ *
+ * @param {string} characterId
+ */
+export function setActiveCharacter(characterId) {
+  if (!characters[characterId]) {
+    throw new Error(
+      `El personaje "${characterId}" no existe.`
+    );
+  }
+
+  activeCharacterId = characterId;
+}
+
+/**
+ * Devuelve el ID del personaje activo.
+ *
+ * @returns {string}
+ */
+export function getActiveCharacterId() {
+  return activeCharacterId;
+}
+
+/**
+ * Devuelve el objeto completo del personaje activo.
+ *
+ * @returns {Object}
+ */
+export function getActiveCharacter() {
+  return characters[activeCharacterId];
 }
