@@ -20,13 +20,12 @@ import { getMessages } from "./chatStore.js";
 import { sendMessage } from "../services/geminiService.js";
 
 /**
- * Genera una respuesta del asistente.
- *
- * @param {string} userMessage
- * @returns {Promise<string>}
- */
-/**
  * Obtiene la respuesta del asistente.
+ *
+ * El historial completo se obtiene desde el Store
+ * y se envía al Service para comunicarse con Gemini.
+ *
+ * @returns {Promise<Object>} Respuesta normalizada del asistente.
  */
 export async function generateResponse() {
     const messages = getMessages();

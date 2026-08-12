@@ -65,10 +65,8 @@ async function generateAssistantMessage(userMessage) {
     hideTypingIndicator();
 
     addMessage({
-
-        role: "assistant",
-
-        content: response
+      role: "assistant",
+      content: response.content
 
     });
 

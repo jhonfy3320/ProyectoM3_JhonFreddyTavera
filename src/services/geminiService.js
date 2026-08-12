@@ -79,7 +79,7 @@ export async function sendMessage(messages) {
     /**
      * 5. Validación de la respuesta
      */
-    if (!data?.reply) {
+    if (!data?.content) {
       throw new Error(
         "El servidor respondió correctamente, pero no devolvió una respuesta válida."
       );
@@ -90,7 +90,7 @@ export async function sendMessage(messages) {
      */
     return {
       role: "assistant",
-      content: data.reply,
+      content: data.content,
       usage: data.usage ?? null,
     };
   } catch (error) {

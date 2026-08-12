@@ -49,7 +49,7 @@ import { GoogleGenAI } from "@google/genai";
  * ==========================================================
  */
 
-const MODEL = "gemini-2.5-flash";
+const MODEL = "gemini-3.6-flash";
 
 const SYSTEM_INSTRUCTION = `
 Eres un asistente de conversación para HeroVerse AI.
@@ -116,31 +116,65 @@ export default async function handler(request, response) {
     });
 
     /**
-     * ======================================================
-     * 5. Enviar historial a Gemini
-     * ======================================================
-     */
-    const result = await ai.models.generateContent({
-      model: MODEL,
-      contents: messages,
-      config: {
-        systemInstruction: SYSTEM_INSTRUCTION,
+ * ======================================================
+ * 5. Adaptar historial al formato de Gemini
+ * ======================================================
+ *
+ * Nuestro frontend utiliza:
+ * {
+ *   role: "user" | "assistant",
+ *   content: "texto"
+ * }
+ *
+ * Gemini utiliza:
+ * {
+ *   role: "user" | "model",
+ *   parts: [
+ *     { text: "texto" }
+ *   ]
+ * }
+ */
+const contents = messages
+  .filter((message) => {
+    return (
+      message &&
+      typeof message.content === "string" &&
+      message.content.trim().length > 0
+    );
+  })
+  .map((message) => ({
+    role: message.role === "assistant" ? "model" : "user",
+    parts: [
+      {
+        text: message.content.trim(),
       },
-    });
+    ],
+  }));
 
-    /**
-     * ======================================================
-     * 6. Obtener texto generado
-     * ======================================================
-     */
-    const text = result.text;
+/**
+ * Validamos que después de la transformación
+ * todavía exista contenido válido.
+ */
+if (contents.length === 0) {
+  return response.status(400).json({
+    error: "No existen mensajes válidos para enviar a Gemini.",
+  });
+}
 
-    if (!text) {
-      return response.status(502).json({
-        error: "Gemini no devolvió una respuesta válida.",
-      });
-    }
+/**
+ * ======================================================
+ * 6. Enviar historial transformado a Gemini
+ * ======================================================
+ */
+const result = await ai.models.generateContent({
+  model: MODEL,
+  contents,
+  config: {
+    systemInstruction: SYSTEM_INSTRUCTION,
+  },
+});
 
+const text = result.text;
     /**
      * ======================================================
      * 7. Respuesta limpia al frontend
