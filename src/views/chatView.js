@@ -18,62 +18,60 @@
  import { initChatController } from "../engine/chatController.js";
 
 export function chatView() {
-
     setTimeout(() => {
         initChatController();
     });
 
-  return `
+    return `
     <section class="chat-view">
-
       <!-- ===================================== -->
-      <!-- Encabezado del Chat -->
+      <!-- Cabecera moderna del Chat -->
       <!-- ===================================== -->
       <header class="chat-header">
-          <h2>💬 Chat</h2>
-          <p>Comienza una conversación con tu personaje favorito.</p>
-      </header>>
+        <div class="chat-header__character">
+          <div class="chat-header__avatar">
+            🕵️
+          </div>
+          <div class="chat-header__info">
+            <div class="chat-header__name-row">
+              <h2 class="chat-header__name">
+                Sherlock Holmes
+              </h2>
+              <span class="chat-header__status">
+                <span class="chat-header__status-dot"></span>
+                En línea
+              </span>
+            </div>
+            <p class="chat-header__description">
+              Detective consultor · Observador · Analítico
+            </p>
+          </div>
+        </div>
+      </header>
 
       <!-- ===================================== -->
       <!-- Conversación -->
       <!-- ===================================== -->
-      <main id="chatMessages" class="chat-messages">
+      <main id="messages" class="chat-messages">
         <div class="message assistant">
-          Bienvenido a HeroVerse AI.
-          Estoy listo para comenzar nuestra conversación.
+          Bienvenido a HeroVerse AI. Estoy listo para comenzar nuestra conversación.
         </div>
       </main>
 
       <!-- ===================================== -->
-      <!-- Estado del Chat -->
+      <!-- Composer -->
       <!-- ===================================== -->
-      <section
-          id="messages"
-          class="messages">
-      </section>
-
-
-      <!-- ===================================== -->
-      <!-- Área de escritura -->
-      <!-- ===================================== -->
-               <form
-                id="chat-form"
-                class="chat-form">
-
-                <textarea
-                    id="chat-input"
-                    placeholder="Escribe un mensaje..."
-                    rows="3">
-                </textarea>
-
-                <button
-                    type="submit"
-                    class="btn btn-primary">
-                    Enviar
-                </button>
-
-            </form>
-
-        </section>
+      <form id="chat-form" class="chat-form">
+        <textarea
+          id="chat-input"
+          placeholder="Escribe un mensaje..."
+          rows="3"
+          aria-label="Escribe tu mensaje"
+        ></textarea>
+        <button type="submit" class="btn btn-primary">
+          ✈️ Enviar
+        </button>
+      </form>
+    </section>
   `;
 }

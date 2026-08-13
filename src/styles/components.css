@@ -560,3 +560,107 @@ main{
     padding: 1.5rem 1rem;
   }
 }
+/* ==========================================================
+   CHAT HEADER
+   ========================================================== */
+.chat-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background: rgba(30, 41, 59, 0.88);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(12px);
+  margin-bottom: 1rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* ==========================================================
+   PERSONAJE
+   ========================================================== */
+.chat-header__character {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* ==========================================================
+   AVATAR
+   ========================================================== */
+.chat-header__avatar {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  font-size: 1.7rem;
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12), 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* ==========================================================
+   INFORMACIÓN
+   ========================================================== */
+.chat-header__info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+/* ==========================================================
+   NOMBRE + ESTADO
+   ========================================================== */
+.chat-header__name-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.chat-header__name {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* ==========================================================
+   ESTADO ONLINE
+   ========================================================== */
+.chat-header__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.12);
+  color: #86efac;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.chat-header__status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.8);
+}
+
+/* ==========================================================
+   DESCRIPCIÓN
+   ========================================================== */
+.chat-header__description {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
