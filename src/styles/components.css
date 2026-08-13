@@ -428,3 +428,133 @@ main{
   flex-wrap: wrap;
   gap: .8rem;
 }
+/* ==========================================================
+   Character Selector
+   ========================================================== */
+.character-selector {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.character-selector__header {
+  margin-bottom: 1.5rem;
+}
+
+.character-selector__header h2 {
+  margin-bottom: 0.5rem;
+}
+
+.character-selector__header p {
+  margin: 0;
+  opacity: 0.75;
+}
+
+.character-selector__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+/* ==========================================================
+   Character Card
+   ========================================================== */
+.character-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.75rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  color: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+/* ==========================================================
+   Hover
+   ========================================================== */
+.character-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(124, 58, 237, 0.7);
+  background: rgba(124, 58, 237, 0.08);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* ==========================================================
+   Avatar
+   ========================================================== */
+.character-card__avatar {
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.35), rgba(79, 70, 229, 0.15));
+  border: 2px solid rgba(124, 58, 237, 0.4);
+  font-size: 3rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.character-card:hover .character-card__avatar {
+  transform: scale(1.08);
+  border-color: rgba(124, 58, 237, 0.9);
+  box-shadow: 0 0 25px rgba(124, 58, 237, 0.35);
+}
+
+/* ==========================================================
+   Character Information
+   ========================================================== */
+.character-card__content {
+  width: 100%;
+}
+
+.character-card__name {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.character-card__description {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.7;
+}
+
+/* ==========================================================
+   Selected Character
+   ========================================================== */
+.character-card--selected {
+  border-color: #7c3aed;
+  background: linear-gradient(145deg, rgba(124, 58, 237, 0.18), rgba(79, 70, 229, 0.08));
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2), 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.character-card--selected .character-card__avatar {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.45);
+}
+
+/* ==========================================================
+   Responsive
+   ========================================================== */
+@media (max-width: 900px) {
+  .character-selector__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .character-selector__grid {
+    grid-template-columns: 1fr;
+  }
+  .character-card {
+    padding: 1.5rem 1rem;
+  }
+}

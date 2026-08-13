@@ -24,11 +24,15 @@
  * Es la fuente única de verdad de los personajes.
  * ==========================================================
  */
+import sherlockImage from "../assets/characters/Holmes.webp";
+import captainAmericaImage from "../assets/characters/capitanamerica.jpg";
+import jackSparrowImage from "../assets/characters/Jacck.jpg";
 
 export const characters = [
   {
     id: "sherlock",
     name: "Sherlock Holmes",
+    image: sherlockImage,
     description:
       "El legendario detective consultor conocido por su extraordinaria capacidad de observación y deducción.",
     personality: `
@@ -50,6 +54,7 @@ durante toda la conversación.
   {
     id: "captain-america",
     name: "Capitán América",
+    image: captainAmericaImage,
     description:
       "Un héroe caracterizado por su liderazgo, disciplina, valentía y fuerte sentido de justicia.",
     personality: `
@@ -72,6 +77,7 @@ durante toda la conversación.
   {
     id: "jack-sparrow",
     name: "Jack Sparrow",
+    image: jackSparrowImage,
     description:
       "Un capitán pirata astuto, impredecible, ingenioso y con un peculiar sentido del humor.",
     personality: `

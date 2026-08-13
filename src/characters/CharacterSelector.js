@@ -28,8 +28,15 @@ export function CharacterSelector(selectedCharacterId = null) {
   return `
     <section class="character-selector">
       <div class="character-selector__header">
-        <h2>Elige tu personaje</h2>
-        <p>Selecciona un personaje para comenzar tu conversación.</p>
+        <span class="character-selector__eyebrow">
+          HEROES & LEGENDS
+        </span>
+        <h2 class="character-selector__title">
+          Elige tu personaje
+        </h2>
+        <p class="character-selector__description">
+          Selecciona con quién quieres comenzar tu conversación.
+        </p>
       </div>
 
       <div class="character-selector__grid">
@@ -39,17 +46,32 @@ export function CharacterSelector(selectedCharacterId = null) {
           return `
             <button
               type="button"
-              class="character-card ${isSelected ? "character-card--selected" : ""}"
+              class="character-card character-card--${character.id} ${isSelected ? "character-card--selected" : ""}"
               data-character-id="${character.id}"
               aria-pressed="${isSelected}"
             >
-              <div class="character-card__image">
-                <img src="${character.image}" alt="${character.name}" />
+              <div class="character-card__image-wrapper">
+                <img
+                  class="character-card__image"
+                  src="${character.image}"
+                  alt="${character.name}"
+                  loading="lazy"
+                />
               </div>
+
               <div class="character-card__content">
-                <h3>${character.name}</h3>
-                <p>${character.description}</p>
+                <span class="character-card__role">
+                  PERSONAJE
+                </span>
+                <h3 class="character-card__name">
+                  ${character.name}
+                </h3>
+                <p class="character-card__description">
+                  ${character.description}
+                </p>
               </div>
+
+              <span class="character-card__indicator"></span>
             </button>
           `;
         }).join("")}

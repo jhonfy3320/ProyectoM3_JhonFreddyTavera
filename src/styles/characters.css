@@ -1,0 +1,251 @@
+/* ==========================================================
+   HeroVerse AI
+   Character Selector
+   ========================================================== */
+
+.character-selector {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+/* ==========================================================
+   Header
+   ========================================================== */
+
+.character-selector__header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.character-selector__eyebrow {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #a78bfa;
+}
+
+.character-selector__title {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+.character-selector__description {
+  max-width: 600px;
+  margin: 0.75rem auto 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #94a3b8;
+}
+
+/* ==========================================================
+   Grid
+   ========================================================== */
+
+.character-selector__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+/* ==========================================================
+   Character Card
+   ========================================================== */
+
+.character-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 2rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.character-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(167, 139, 250, 0.55);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+}
+
+.character-card:focus-visible {
+  outline: 3px solid rgba(167, 139, 250, 0.8);
+  outline-offset: 4px;
+}
+
+/* ==========================================================
+   Avatar
+   ========================================================== */
+
+.character-card__image-wrapper {
+  width: 130px;
+  height: 130px;
+  padding: 5px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.character-card:hover .character-card__image-wrapper {
+  transform: scale(1.06);
+  box-shadow: 0 15px 35px rgba(124, 58, 237, 0.35);
+}
+
+.character-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  background: #111827;
+}
+
+/* ==========================================================
+   Content
+   ========================================================== */
+
+.character-card__content {
+  width: 100%;
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.character-card__role {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #94a3b8;
+}
+
+.character-card__name {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 750;
+  color: #ffffff;
+}
+
+.character-card__description {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #94a3b8;
+}
+
+/* ==========================================================
+   Selected
+   ========================================================== */
+
+.character-card--selected {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.25), 0 20px 45px rgba(124, 58, 237, 0.2);
+}
+
+.character-card--selected .character-card__indicator {
+  opacity: 1;
+}
+
+.character-card__indicator {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #8b5cf6;
+  box-shadow: 0 0 0 5px rgba(139, 92, 246, 0.15);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* ==========================================================
+   Sherlock Holmes
+   ========================================================== */
+
+.character-card--sherlock:hover,
+.character-card--sherlock.character-card--selected {
+  border-color: #38bdf8;
+}
+
+.character-card--sherlock .character-card__image-wrapper {
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
+}
+
+.character-card--sherlock .character-card__indicator {
+  background: #38bdf8;
+}
+
+/* ==========================================================
+   Capitán América
+   ========================================================== */
+
+.character-card--captain-america:hover,
+.character-card--captain-america.character-card--selected {
+  border-color: #ef4444;
+}
+
+.character-card--captain-america .character-card__image-wrapper {
+  background: linear-gradient(135deg, #ef4444, #2563eb);
+}
+
+.character-card--captain-america .character-card__indicator {
+  background: #ef4444;
+}
+
+/* ==========================================================
+   Jack Sparrow
+   ========================================================== */
+
+.character-card--jack-sparrow:hover,
+.character-card--jack-sparrow.character-card--selected {
+  border-color: #f59e0b;
+}
+
+.character-card--jack-sparrow .character-card__image-wrapper {
+  background: linear-gradient(135deg, #f59e0b, #92400e);
+}
+
+.character-card--jack-sparrow .character-card__indicator {
+  background: #f59e0b;
+}
+
+/* ==========================================================
+   Responsive
+   ========================================================== */
+
+@media (max-width: 900px) {
+  .character-selector__grid {
+    grid-template-columns: 1fr;
+    max-width: 450px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .character-selector {
+    padding: 2rem 1rem;
+  }
+
+  .character-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .character-card__image-wrapper {
+    width: 105px;
+    height: 105px;
+  }
+}
