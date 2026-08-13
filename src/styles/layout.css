@@ -79,12 +79,18 @@ button {
    HEADER
 ========================================== */
 .header {
-  background: var(--color-surface);
-  padding: var(--space-lg);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(17, 24, 39, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 0.9rem 1.5rem;
   border-bottom: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: 0.9rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 /* ==========================================
@@ -92,19 +98,27 @@ button {
 ========================================== */
 .logo {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .logo h1 {
+  margin: 0;
   font-family: var(--font-title);
   font-size: var(--fs-xl);
+  font-weight: 800;
   color: var(--color-primary);
+  letter-spacing: -0.03em;
+  text-shadow: 0 0 20px rgba(124, 58, 237, 0.25);
 }
 
 .logo span {
   display: block;
-  margin-top: .25rem;
+  margin-top: 0.15rem;
   color: var(--color-text-secondary);
   font-size: var(--fs-sm);
+  letter-spacing: 0.04em;
 }
 
 /* ==========================================
@@ -113,17 +127,51 @@ button {
 .navigation {
   display: flex;
   justify-content: center;
-  gap: var(--space-lg);
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.035);
 }
 
 .navigation a {
-  color: var(--color-text);
-  font-weight: 500;
-  transition: var(--transition);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: color 0.25s ease, background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+/* Hover */
 .navigation a:hover {
-  color: var(--color-secondary);
+  color: var(--color-text);
+  background: rgba(124, 58, 237, 0.12);
+  transform: translateY(-1px);
+}
+
+/* Active / ruta seleccionada */
+.navigation a.active {
+  color: #ffffff;
+  background: var(--color-primary);
+  box-shadow: 0 5px 18px rgba(124, 58, 237, 0.3);
+}
+
+/* Focus accesible */
+.navigation a:focus-visible {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 3px;
+}
+
+/* Click */
+.navigation a:active {
+  transform: scale(0.97);
 }
 
 /* ==========================================
@@ -164,4 +212,38 @@ main {
   text-align: center;
   color: var(--color-text-secondary);
   font-size: var(--fs-sm);
+}
+@media (min-width: 768px) {
+  .header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .navigation {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.75rem;
+  }
+
+  .navigation {
+    width: 100%;
+    gap: 0.25rem;
+  }
+
+  .navigation a {
+    flex: 1;
+    min-height: 44px;
+    padding: 0.5rem 0.65rem;
+    font-size: 0.85rem;
+  }
 }
