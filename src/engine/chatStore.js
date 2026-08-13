@@ -98,7 +98,11 @@ export function hasMessages() {
  * @param {string} characterId
  */
 export function setActiveCharacter(characterId) {
-  if (!characters[characterId]) {
+  const characterExists = characters.some(
+    (character) => character.id === characterId
+  );
+
+  if (!characterExists) {
     throw new Error(
       `El personaje "${characterId}" no existe.`
     );
@@ -122,5 +126,7 @@ export function getActiveCharacterId() {
  * @returns {Object}
  */
 export function getActiveCharacter() {
-  return characters[activeCharacterId];
+  return characters.find(
+    (character) => character.id === activeCharacterId
+  );
 }

@@ -25,7 +25,7 @@ export function chatView() {
     return `
     <section class="chat-view">
       <!-- ===================================== -->
-      <!-- Cabecera moderna del Chat -->
+      <!-- Cabecera del Chat -->
       <!-- ===================================== -->
       <header class="chat-header">
         <div class="chat-header__character">
@@ -52,25 +52,28 @@ export function chatView() {
       <!-- ===================================== -->
       <!-- Conversación -->
       <!-- ===================================== -->
-      <main id="messages" class="chat-messages">
-        <div class="message assistant">
-          Bienvenido a HeroVerse AI. Estoy listo para comenzar nuestra conversación.
-        </div>
-      </main>
+      <main id="messages" class="chat-messages"></main>
 
       <!-- ===================================== -->
       <!-- Composer -->
       <!-- ===================================== -->
       <form id="chat-form" class="chat-form">
-        <textarea
-          id="chat-input"
-          placeholder="Escribe un mensaje..."
-          rows="3"
-          aria-label="Escribe tu mensaje"
-        ></textarea>
-        <button type="submit" class="btn btn-primary">
-          ✈️ Enviar
-        </button>
+        <div class="chat-form__input-wrapper">
+          <textarea
+            id="chat-input"
+            class="chat-form__input"
+            placeholder="Escribe un mensaje..."
+            rows="1"
+            aria-label="Escribe un mensaje"
+          ></textarea>
+          <button
+            type="submit"
+            class="chat-form__send"
+            aria-label="Enviar mensaje"
+          >
+            <span>➤</span>
+          </button>
+        </div>
       </form>
     </section>
   `;

@@ -664,3 +664,303 @@ main{
   font-size: 0.85rem;
   line-height: 1.4;
 }
+/* ==========================================================
+   HeroVerse AI
+   5.4.2.2 — Burbujas de conversación
+   ========================================================== */
+
+/* ==========================================
+   Contenedor de cada mensaje
+   ========================================== */
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  margin-bottom: 1.25rem;
+  animation: messageAppear 0.3s ease-out;
+}
+
+/* ==========================================
+   Avatar
+   ========================================== */
+.message-avatar {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.20);
+  font-size: 1.2rem;
+}
+
+/* ==========================================
+   Contenido
+   ========================================== */
+.message-content {
+  display: flex;
+  flex-direction: column;
+  max-width: min(75%, 720px);
+  padding: 0.9rem 1.1rem;
+  border-radius: 18px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+  line-height: 1.6;
+}
+
+/* ==========================================
+   Nombre del emisor
+   ========================================== */
+.message-header {
+  margin-bottom: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.message-header strong {
+  letter-spacing: 0.01em;
+}
+
+/* ==========================================
+   Mensaje de la IA
+   ========================================== */
+.message-ai {
+  justify-content: flex-start;
+}
+
+.message-ai .message-content {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-top-left-radius: 6px;
+}
+
+.message-ai .message-header {
+  color: var(--color-primary);
+}
+
+/* ==========================================
+   Mensaje del usuario
+   ========================================== */
+.message-user {
+  justify-content: flex-end;
+}
+
+.message-user .message-content {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: #ffffff;
+  border: none;
+  border-top-right-radius: 6px;
+}
+
+.message-user .message-header {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.message-user .message-avatar {
+  order: 2;
+}
+
+/* ==========================================
+   Texto del mensaje
+   ========================================== */
+.message-content p {
+  margin: 0;
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   Animación
+   ========================================== */
+@keyframes messageAppear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   Responsive
+   ========================================== */
+@media (max-width: 768px) {
+  .message-content {
+    max-width: 85%;
+  }
+  .message-avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+}
+
+/* ==========================================
+   Mobile
+   ========================================== */
+@media (max-width: 480px) {
+  .message {
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .message-content {
+    max-width: 88%;
+    padding: 0.75rem 0.9rem;
+    border-radius: 15px;
+  }
+  .message-content p {
+    font-size: 0.92rem;
+  }
+  .message-avatar {
+    width: 34px;
+    height: 34px;
+  }
+}
+/* ==========================================================
+   HeroVerse AI
+   5.4.2.3 — Composer del Chat
+   ========================================================== */
+
+/* ==========================================
+   Composer
+   ========================================== */
+.chat-form {
+  width: 100%;
+  max-width: 900px;
+  margin: 1.5rem auto 0;
+  padding: 0 0 1rem;
+}
+
+/* ==========================================
+   Contenedor del input
+   ========================================== */
+.chat-form__input-wrapper {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  padding: 0.55rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.20);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* ==========================================
+   Estado Focus
+   ========================================== */
+.chat-form__input-wrapper:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15), 0 10px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* ==========================================
+   Textarea
+   ========================================== */
+.chat-form__input {
+  flex: 1;
+  min-height: 44px;
+  max-height: 140px;
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  resize: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ==========================================
+   Placeholder
+   ========================================== */
+.chat-form__input::placeholder {
+  color: var(--color-text-secondary);
+  opacity: 0.75;
+}
+
+/* ==========================================
+   Botón enviar
+   ========================================== */
+.chat-form__send {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.4rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.30);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+/* ==========================================
+   Hover
+   ========================================== */
+.chat-form__send:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 9px 22px rgba(124, 58, 237, 0.40);
+  filter: brightness(1.08);
+}
+
+/* ==========================================
+   Active
+   ========================================== */
+.chat-form__send:active {
+  transform: scale(0.94);
+}
+
+/* ==========================================
+   Focus accesible
+   ========================================== */
+.chat-form__send:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 3px;
+}
+
+/* ==========================================
+   Estado disabled
+   ========================================== */
+.chat-form__send:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ==========================================
+   Mobile
+   ========================================== */
+@media (max-width: 600px) {
+  .chat-form {
+    margin-top: 1rem;
+    padding-bottom: 0.75rem;
+  }
+  .chat-form__input-wrapper {
+    padding: 0.45rem;
+    border-radius: 18px;
+  }
+  .chat-form__input {
+    min-height: 42px;
+    padding: 0.7rem 0.75rem;
+    font-size: 0.9rem;
+  }
+  .chat-form__send {
+    width: 42px;
+    height: 42px;
+    font-size: 1.05rem;
+  }
+}
