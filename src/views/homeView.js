@@ -15,7 +15,11 @@
  * ==========================================================
  */
 import { CharacterSelector } from "../characters/CharacterSelector.js";
+import { initCharacterSelector } from "../characters/characterController.js";
 export function homeView() {
+   setTimeout(() => {
+        initCharacterSelector();
+    });
   return `
     <section class="home-view">
 
