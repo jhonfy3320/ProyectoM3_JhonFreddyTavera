@@ -118,68 +118,6 @@ Jack Sparrow posee una personalidad caracterizada por:
 Su System Prompt busca mantener un estilo de comunicación humorístico, irónico e impredecible.
 
 ---
-
-# 🏗️ Arquitectura del proyecto
-
-HeroVerse AI utiliza una arquitectura modular para separar responsabilidades.
-
-```text
-HeroVerse-AI/
-│
-├── api/
-│   └── chat.js
-│
-├── public/
-│
-├── src/
-│   │
-│   ├── assets/
-│   │
-│   ├── characters/
-│   │   ├── characters.js
-│   │   └── CharacterSelector.js
-│   │
-│   ├── components/
-│   │   └── MessageBubble.js
-│   │
-│   ├── engine/
-│   │   ├── chatController.js
-│   │   ├── chatEngine.js
-│   │   └── chatStore.js
-│   │
-│   ├── router/
-│   │   └── router.js
-│   │
-│   ├── services/
-│   │   └── geminiService.js
-│   │
-│   ├── styles/
-│   │   ├── main.css
-│   │   ├── variables.css
-│   │   ├── layout.css
-│   │   ├── components.css
-│   │   └── characters.css
-│   │
-│   ├── ui/
-│   │   └── chatRenderer.js
-│   │
-│   ├── views/
-│   │   ├── homeView.js
-│   │   ├── chatView.js
-│   │   └── aboutView.js
-│   │
-│   └── main.js
-│
-├── tests/
-│   ├── characters.test.js
-│   ├── chatStore.test.js
-│   └── geminiService.test.js
-│
-├── .env.local
-├── .gitignore
-├── package.json
-├── vite.config.js
-└── README.md
 # 🦸 HeroVerse AI
 
 > Single Page Application (SPA) de conversaciones con personajes ficticios utilizando Inteligencia Artificial generativa mediante Google Gemini AI.
@@ -270,3 +208,64 @@ https://github.com/jhonfy3320/HeroVerse-AI
 ```bash
 git clone https://github.com/jhonfy3320/HeroVerse-AI.git
 cd HeroVerse-AI
+
+# 🏗️ Arquitectura del proyecto
+HeroVerse AI utiliza una arquitectura modular para separar responsabilidades.
+
+```text
+HeroVerse-AI/
+│
+├── api/
+│   └── chat.js
+│
+├── public/
+│
+├── src/
+│   │
+│   ├── assets/
+│   │
+│   ├── characters/
+│   │   ├── characters.js
+│   │   └── CharacterSelector.js
+│   │
+│   ├── components/
+│   │   └── MessageBubble.js
+│   │
+│   ├── engine/
+│   │   ├── chatController.js
+│   │   ├── chatEngine.js
+│   │   └── chatStore.js
+│   │
+│   ├── router/
+│   │   └── router.js
+│   │
+│   ├── services/
+│   │   └── geminiService.js
+│   │
+│   ├── styles/
+│   │   ├── main.css
+│   │   ├── variables.css
+│   │   ├── layout.css
+│   │   ├── components.css
+│   │   └── characters.css
+│   │
+│   ├── ui/
+│   │   └── chatRenderer.js
+│   │
+│   ├── views/
+│   │   ├── homeView.js
+│   │   ├── chatView.js
+│   │   └── aboutView.js
+│   │
+│   └── main.js
+│
+├── tests/
+│   ├── characters.test.js
+│   ├── chatStore.test.js
+│   └── geminiService.test.js
+│
+├── .env.local
+├── .gitignore
+├── package.json
+├── vite.config.js
+└── README.md
