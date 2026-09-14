@@ -16,6 +16,7 @@
  */
 export function MessageBubble(message) {
   const isUser = message.role === "user";
+  const safeContent = escapeHTML(message.content);
 
   return `
     <article class="message ${isUser ? "message-user" : "message-ai"}">
@@ -27,9 +28,18 @@ export function MessageBubble(message) {
           <strong>${isUser ? "Tú" : "AI"}</strong>
         </header>
         <p class="message-text">
-          ${message.content}
+          ${safeContent}
         </p>
       </div>
     </article>
   `;
+}
+
+function escapeHTML(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }

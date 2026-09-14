@@ -21,6 +21,7 @@
 
 import { getMessages } from "../engine/chatStore.js";
 import { MessageBubble } from "../components/MessageBubble.js";
+import { beforeAll } from "vitest";
 
 /**
  * Renderiza toda la conversación.
@@ -52,7 +53,8 @@ export function showTypingIndicator() {
 
   if (!container) return;
 
-  container.innerHTML += `
+  container.insertAdjacentElement("beforeend",
+  `
     <article id="typing-indicator" class="message message-ai">
       <div class="message-avatar">
         🤖
@@ -66,7 +68,7 @@ export function showTypingIndicator() {
         </p>
       </div>
     </article>
-  `;
+  `);
 
   scrollToBottom(container);
 }

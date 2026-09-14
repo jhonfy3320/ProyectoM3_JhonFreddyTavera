@@ -75,7 +75,6 @@ describe("Gemini Service", () => {
       "No fue posible conectar con el servidor. Verifica tu conexión."
     );
   });
-});
 
 //Agregamos el test de 400
 it("debe manejar un error HTTP 400", async () => {
@@ -286,4 +285,5 @@ it("debe aceptar una respuesta 200 con content válido", async () => {
     content: "Saludos, Freddy.",
     usage: null,
   });
+});
 });
