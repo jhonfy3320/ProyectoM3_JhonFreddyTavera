@@ -34,9 +34,9 @@
  * }
  */
 import { characters } from "../characters/characters.js";
-
-
-const messages = [];
+const conversations = Object.fromEntries(
+  characters.map((character) => [character.id, []])
+);
 
 /**
  * ==========================================================
@@ -62,28 +62,27 @@ let activeCharacterId = "sherlock";
  * @param {string} message.content
  */
 export function addMessage(message) {
-  messages.push(message);
+  conversations[activeCharacterId].push(message);
 }
-
 /**
  * Devuelve una copia del historial.
  */
 export function getMessages() {
-  return [...messages];
+  return [...conversations[activeCharacterId]];
 }
 
 /**
  * Elimina todos los mensajes.
  */
 export function clearMessages() {
-  messages.length = 0;
+  conversations[activeCharacterId].length = 0;
 }
 
 /**
  * Indica si existen mensajes almacenados.
  */
 export function hasMessages() {
-  return messages.length > 0;
+  return conversations[activeCharacterId].length > 0;
 }
 
 /**

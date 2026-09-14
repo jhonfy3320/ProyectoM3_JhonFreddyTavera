@@ -13,6 +13,7 @@ import {
 describe("Chat Store de HeroVerse AI", () => {
   beforeEach(() => {
     clearMessages();
+    setActiveCharacter("sherlock");
   });
 
   describe("Historial de mensajes", () => {
@@ -85,7 +86,6 @@ describe("Chat Store de HeroVerse AI", () => {
       expect(getMessages()).toEqual([]);
     });
   });
-
   describe("Personaje activo", () => {
     it("debe iniciar con Sherlock Holmes", () => {
       expect(getActiveCharacterId()).toBe("sherlock");
@@ -121,6 +121,40 @@ describe("Chat Store de HeroVerse AI", () => {
       expect(() => {
         setActiveCharacter("personaje-inexistente");
       }).toThrow();
+    });
+  });
+
+  describe("Historial independiente por personaje", () => {
+    it("debe mantener un historial separado para cada personaje", () => {
+      setActiveCharacter("sherlock");
+
+      addMessage({
+        role: "user",
+        content: "Mensaje para Sherlock",
+      });
+
+      setActiveCharacter("captain-america");
+
+      addMessage({
+        role: "user",
+        content: "Mensaje para Capitán América",
+      });
+
+      expect(getMessages()).toEqual([
+        {
+          role: "user",
+          content: "Mensaje para Capitán América",
+        },
+      ]);
+
+      setActiveCharacter("sherlock");
+
+      expect(getMessages()).toEqual([
+        {
+          role: "user",
+          content: "Mensaje para Sherlock",
+        },
+      ]);
     });
   });
 });
