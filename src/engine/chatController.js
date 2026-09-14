@@ -31,6 +31,8 @@ export function initChatController() {
 
   if (!form || !input) return;
 
+  renderChat();
+
   form.addEventListener("submit", handleSubmit);
 }
 /**
