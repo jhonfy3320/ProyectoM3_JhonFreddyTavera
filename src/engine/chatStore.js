@@ -61,8 +61,17 @@ let activeCharacterId = "sherlock";
  * @param {"user"|"assistant"} message.role
  * @param {string} message.content
  */
-export function addMessage(message) {
-  conversations[activeCharacterId].push(message);
+export function addMessage(
+  message,
+  characterId = activeCharacterId
+) {
+  if (!Object.hasOwn(conversations, characterId)) {
+    throw new Error(
+      `No existe una conversación para el personaje "${characterId}".`
+    );
+  }
+
+  conversations[characterId].push(message);
 }
 /**
  * Devuelve una copia del historial.

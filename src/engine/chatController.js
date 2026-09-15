@@ -13,7 +13,10 @@
  * ==========================================================
  */
 import { generateResponse } from "./chatEngine.js";
-import { addMessage } from "./chatStore.js";
+import {
+  addMessage,
+  getActiveCharacterId,
+} from "./chatStore.js";
 import {
   renderChat,
   showTypingIndicator,
@@ -41,26 +44,35 @@ export function initChatController() {
 function handleSubmit(event) {
   event.preventDefault();
 
+  if ( chatState === "loading") {
+    return
+  }
+
   const input = document.getElementById("chat-input");
   const text = input.value.trim();
 
   if (!text) return;
 
-  addMessage({
-    role: "user",
-    content: text
-  });
+  const characterId = getActiveCharacterId();
+
+  addMessage(
+    {
+      role: "user",
+      content: text,
+    },
+    characterId
+  );
 
   renderChat();
   input.value = "";
 
-  generateAssistantMessage(text);
-}
+  generateAssistantMessage(characterId); 
+  }
 
 /**
  * Solicita una respuesta al Chat Engine.
  */
-async function generateAssistantMessage(userMessage) {
+async function generateAssistantMessage(characterId) {
   chatState = "loading";
 
   showTypingIndicator();
@@ -74,10 +86,13 @@ async function generateAssistantMessage(userMessage) {
       );
     }
 
-    addMessage({
+    addMessage(
+    {
       role: "assistant",
-      content: response.content
-    });
+      content: response.content,
+    },
+    characterId
+  );
 
     chatState = "success";
 
