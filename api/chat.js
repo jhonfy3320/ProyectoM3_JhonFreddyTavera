@@ -100,20 +100,91 @@ export default async function handler(request, response) {
      * 3. Obtener datos enviados por el frontend
      * ======================================================
      */
-    const { messages, characterId } = request.body;
-
-    if (!Array.isArray(messages) || messages.length === 0) {
+    //const { messages, characterId } = request.body;
+    if (!request.body || typeof request.body !== "object") {
       return response.status(400).json({
-        error: "El historial de mensajes es obligatorio.",
+        error: "El cuerpo de la solicitud es obligatorio.",
       });
     }
-    const systemInstruction = characterPrompts[characterId];
 
-    if (!systemInstruction) {
+    const { messages, characterId } = request.body;
+
+    if (characterId === undefined || characterId === null) {
+      return response.status(400).json({
+        error: "El characterId es obligatorio.",
+      });
+    }
+
+    if (
+      typeof characterId !== "string" ||
+      characterId.trim().length === 0
+    ) {
+      return response.status(400).json({
+        error: "El characterId debe ser un texto válido.",
+      });
+    }
+
+    if (!Object.hasOwn(characterPrompts, characterId)) {
       return response.status(400).json({
         error: "El personaje seleccionado no es válido.",
       });
     }
+
+   if (messages === undefined || messages === null) {
+      return response.status(400).json({
+        error: "El historial de mensajes es obligatorio.",
+      });
+    }
+
+    if (!Array.isArray(messages)) {
+      return response.status(400).json({
+        error: "El historial de mensajes debe ser un array.",
+      });
+    }
+
+    if (messages.length === 0) {
+      return response.status(400).json({
+        error: "El historial de mensajes no puede estar vacío.",
+      });
+    }
+    const hasInvalidMessage = messages.some(
+      (message) =>
+        message === null ||
+        typeof message !== "object" ||
+        Array.isArray(message)
+    );
+
+    if (hasInvalidMessage) {
+      return response.status(400).json({
+        error: "Cada mensaje debe ser un objeto válido.",
+      });
+    }
+
+    const hasInvalidRole = messages.some(
+      (message) =>
+        message.role !== "user" &&
+        message.role !== "assistant"
+    );
+
+    if (hasInvalidRole) {
+      return response.status(400).json({
+        error: 'El role de cada mensaje debe ser "user" o "assistant".',
+      });
+    }
+
+    const hasInvalidContent = messages.some(
+      (message) =>
+        typeof message.content !== "string" ||
+        message.content.trim().length === 0
+    );
+
+    if (hasInvalidContent) {
+      return response.status(400).json({
+        error: "El contenido de cada mensaje debe ser un texto válido.",
+      });
+    }
+
+    const systemInstruction = characterPrompts[characterId];
     /**
      * ======================================================
      * 4. Crear cliente de Gemini
@@ -144,22 +215,14 @@ export default async function handler(request, response) {
  */
 console.log("📨 Historial recibido:", JSON.stringify(messages, null, 2));
 
-const contents = messages
-  .filter((message) => {
-    return (
-      message &&
-      typeof message.content === "string" &&
-      message.content.trim().length > 0
-    );
-  })
-  .map((message) => ({
-    role: message.role === "assistant" ? "model" : "user",
-    parts: [
-      {
-        text: message.content.trim(),
-      },
-    ],
-  }));
+const contents = messages.map((message) => ({
+  role: message.role === "assistant" ? "model" : "user",
+  parts: [
+    {
+      text: message.content.trim(),
+    },
+  ],
+}));
 
   console.log(
   "🧠 Historial transformado para Gemini:",
@@ -169,12 +232,12 @@ const contents = messages
 /**
  * Validamos que después de la transformación
  * todavía exista contenido válido.
- */
+ 
 if (contents.length === 0) {
   return response.status(400).json({
     error: "No existen mensajes válidos para enviar a Gemini.",
   });
-}
+}*/
 
 /**
  * ======================================================
@@ -226,4 +289,5 @@ const text = result.text;
     error: "No fue posible obtener una respuesta de la IA.",
   });
 }
+
 }
