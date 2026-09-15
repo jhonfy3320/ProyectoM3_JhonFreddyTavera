@@ -16,7 +16,10 @@
  * Solamente pedirá una respuesta al Engine.
  * ==========================================================
  */
-import { getMessages } from "./chatStore.js";
+import {
+  getMessages,
+  getActiveCharacterId,
+} from "./chatStore.js";
 import { sendMessage } from "../services/geminiService.js";
 
 /**
@@ -29,7 +32,11 @@ import { sendMessage } from "../services/geminiService.js";
  */
 export async function generateResponse() {
     const messages = getMessages();
-    const response = await sendMessage(messages);
+    const characterId = getActiveCharacterId();
+    const response = await sendMessage(
+      messages,
+      characterId
+    );
     return response;
 
 }

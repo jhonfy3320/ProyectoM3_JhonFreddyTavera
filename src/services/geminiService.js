@@ -40,7 +40,7 @@ const API_URL = "/api/chat";
  * @param {Array} messages - Historial completo de conversación.
  * @returns {Promise<Object>} Respuesta normalizada del backend.
  */
-export async function sendMessage(messages) {
+export async function sendMessage(messages, characterId) {
   try {
     /**
      * 1. Validación básica
@@ -58,6 +58,7 @@ export async function sendMessage(messages) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        characterId,
         messages,
       }),
     });

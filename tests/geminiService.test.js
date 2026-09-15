@@ -19,7 +19,9 @@ describe("Gemini Service", () => {
     vi.restoreAllMocks();
   });
 
-  it("debe enviar el historial y devolver la respuesta del backend", async () => {
+  it("debe enviar el characterId y el historial al backend", async () => {
+    const characterId = "sherlock";
+
     const messages = [
       {
         role: "user",
@@ -39,8 +41,21 @@ describe("Gemini Service", () => {
       }),
     });
 
-    const result = await sendMessage(messages);
+    const result = await sendMessage(messages, characterId);
 
+    expect(fetch).toHaveBeenCalledWith(
+      "/api/chat",
+      expect.objectContaining({
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          characterId,
+          messages,
+        }),
+      })
+    );
     expect(result).toEqual({
       role: "assistant",
       content: "Un placer saludarle, Freddy.",
@@ -50,7 +65,6 @@ describe("Gemini Service", () => {
       },
     });
   });
-
   it("debe rechazar un historial que no sea un array", async () => {
     await expect(
       sendMessage("Hola Sherlock")
