@@ -29,7 +29,7 @@ export default async function handler(req, res) {
   });
 } */
 import { GoogleGenAI } from "@google/genai";
-
+import { characterPrompts } from "../src/characters/characterPrompts.js";
 /**
  * ==========================================================
  * HeroVerse AI
@@ -51,7 +51,8 @@ import { GoogleGenAI } from "@google/genai";
 
 const MODEL = "gemini-3.6-flash";
 
-const SYSTEM_INSTRUCTION = `
+/**
+ * const SYSTEM_INSTRUCTION = `
 Eres un asistente de conversación para HeroVerse AI.
 
 Tu función es responder como el personaje seleccionado
@@ -63,6 +64,7 @@ Las respuestas deben:
 - Ser relativamente breves.
 - Evitar respuestas innecesariamente extensas.
 `;
+ */
 
 /**
  * Maneja las peticiones al endpoint /api/chat.
@@ -98,14 +100,20 @@ export default async function handler(request, response) {
      * 3. Obtener datos enviados por el frontend
      * ======================================================
      */
-    const { messages } = request.body;
+    const { messages, characterId } = request.body;
 
     if (!Array.isArray(messages) || messages.length === 0) {
       return response.status(400).json({
         error: "El historial de mensajes es obligatorio.",
       });
     }
+    const systemInstruction = characterPrompts[characterId];
 
+    if (!systemInstruction) {
+      return response.status(400).json({
+        error: "El personaje seleccionado no es válido.",
+      });
+    }
     /**
      * ======================================================
      * 4. Crear cliente de Gemini
@@ -177,7 +185,7 @@ const result = await ai.models.generateContent({
   model: MODEL,
   contents,
   config: {
-    systemInstruction: SYSTEM_INSTRUCTION,
+    systemInstruction,
   },
 });
 
