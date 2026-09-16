@@ -19,7 +19,9 @@
  * ==========================================================
  */
 
-import { getMessages } from "../engine/chatStore.js";
+import { getMessages, 
+  getActiveCharacter 
+} from "../engine/chatStore.js";
 import { MessageBubble } from "../components/MessageBubble.js";
 import { beforeAll } from "vitest";
 
@@ -27,19 +29,23 @@ import { beforeAll } from "vitest";
  * Renderiza toda la conversación.
  */
 export function renderChat() {
+  const container = document.getElementById("messages");
 
-    const container = document.getElementById("messages");
+  if (!container) return;
 
-    if (!container) return;
+  const messages = getMessages();
+  const activeCharacter = getActiveCharacter();
 
-    const messages = getMessages();
+  container.innerHTML = messages
+    .map((message) =>
+      MessageBubble(
+        message,
+        activeCharacter
+      )
+    )
+    .join("");
 
-    container.innerHTML = messages
-        .map(message => MessageBubble(message))
-        .join("");
-
-    scrollToBottom(container);
-
+  scrollToBottom(container);
 }
 
 /**
@@ -50,25 +56,43 @@ export function renderChat() {
  */
 export function showTypingIndicator() {
   const container = document.getElementById("messages");
-
   if (!container) return;
 
-  container.insertAdjacentElement("beforeend",
-  `
-    <article id="typing-indicator" class="message message-ai">
-      <div class="message-avatar">
-        🤖
-      </div>
-      <div class="message-content">
-        <header class="message-header">
-          <strong>Sherlock Holmes</strong>
-        </header>
-        <p class="typing">
-          Escribiendo...
-        </p>
-      </div>
-    </article>
-  `);
+  const activeCharacter = getActiveCharacter();
+  if (!activeCharacter) return;
+
+  const characterName = escapeHTML(activeCharacter.name);
+  const characterImage = escapeHTML(activeCharacter.image);
+
+  container.insertAdjacentHTML(
+    "beforeend",
+    `
+      <article
+        id="typing-indicator"
+        class="message message-ai"
+      >
+        <div class="message-avatar">
+          <img
+            class="message-avatar__image"
+            src="${characterImage}"
+            alt="${characterName}"
+          >
+        </div>
+
+        <div class="message-content">
+          <header class="message-header">
+            <strong>
+              ${characterName}
+            </strong>
+          </header>
+
+          <p class="typing">
+            Escribiendo...
+          </p>
+        </div>
+      </article>
+    `
+  );
 
   scrollToBottom(container);
 }
@@ -106,6 +130,14 @@ export function showChatError(message) {
   container.appendChild(errorElement);
 
   scrollToBottom(container);
+}
+function escapeHTML(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 /**
