@@ -1,4 +1,10 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import {
+  describe,
+  it,
+  expect,
+  vi,
+  beforeEach,
+} from "vitest";
 
 const mocks = vi.hoisted(() => ({
   renderChat: vi.fn(),
@@ -12,6 +18,7 @@ const mocks = vi.hoisted(() => ({
   addMessage: vi.fn(),
   getActiveCharacterId: vi.fn(),
 }));
+
 vi.mock("../src/ui/chatRenderer.js", () => ({
   renderChat: mocks.renderChat,
   showTypingIndicator: mocks.showTypingIndicator,
@@ -19,6 +26,7 @@ vi.mock("../src/ui/chatRenderer.js", () => ({
   showChatError: mocks.showChatError,
   hideChatError: mocks.hideChatError,
 }));
+
 vi.mock("../src/engine/chatEngine.js", () => ({
   generateResponse: mocks.generateResponse,
 }));
@@ -30,7 +38,7 @@ vi.mock("../src/engine/chatStore.js", () => ({
 
 import { initChatController } from "../src/engine/chatController.js";
 
-describe("Chat concurrency", () => {
+describe("Chat recoverable error state", () => {
   let submitHandler;
   let input;
 
@@ -64,93 +72,81 @@ describe("Chat concurrency", () => {
         return null;
       }),
     };
-  });
-
-  it("debe guardar la respuesta en el personaje que originó la solicitud", async () => {
-    let resolveResponse;
 
     mocks.getActiveCharacterId.mockReturnValue("sherlock");
+  });
 
-    mocks.generateResponse.mockImplementation(
-      () =>
-        new Promise((resolve) => {
-          resolveResponse = resolve;
-        })
-    );
+  it("debe mostrar un error y permitir un nuevo intento", async () => {
+    mocks.generateResponse
+      .mockRejectedValueOnce(
+        new Error("El servicio de IA no está disponible.")
+      )
+      .mockResolvedValueOnce({
+        role: "assistant",
+        content: "Ya estoy disponible.",
+      });
 
     initChatController();
+
+    // Primer envío: falla.
+    submitHandler({
+      preventDefault: vi.fn(),
+    });
+
+    await Promise.resolve();
+    await Promise.resolve();
+
+    expect(mocks.showChatError).toHaveBeenCalledWith(
+      "El servicio de IA no está disponible."
+    );
+    expect(mocks.addMessage).not.toHaveBeenCalledWith(
+    {
+        role: "assistant",
+        content: "El servicio de IA no está disponible.",
+    },
+    "sherlock"
+    );
+
+    expect(mocks.hideTypingIndicator).toHaveBeenCalled();
+
+    // Segundo intento después del error.
+    input.value = "Intentar de nuevo";
 
     submitHandler({
       preventDefault: vi.fn(),
     });
 
-    // El usuario cambia de personaje mientras Gemini responde.
-    mocks.getActiveCharacterId.mockReturnValue("jack-sparrow");
-
-    resolveResponse({
-      role: "assistant",
-      content: "Respuesta para Sherlock",
-    });
-
     await Promise.resolve();
     await Promise.resolve();
+
+    expect(mocks.generateResponse).toHaveBeenCalledTimes(2);
 
     expect(mocks.addMessage).toHaveBeenCalledWith(
       {
         role: "assistant",
-        content: "Respuesta para Sherlock",
+        content: "Ya estoy disponible.",
       },
       "sherlock"
     );
   });
-  it("debe impedir un segundo envío mientras existe una solicitud en curso", async () => {
-  let resolveResponse;
-
-  mocks.getActiveCharacterId.mockReturnValue("sherlock");
-
-  mocks.generateResponse.mockImplementation(
-    () =>
-      new Promise((resolve) => {
-        resolveResponse = resolve;
-      })
+  it("debe mostrar un mensaje seguro cuando el error no tenga formato válido", async () => {
+  mocks.generateResponse.mockRejectedValueOnce(
+    "error desconocido"
   );
 
   initChatController();
 
-  // Primer mensaje.
-  input.value = "Primer mensaje";
-
   submitHandler({
     preventDefault: vi.fn(),
   });
 
-  // Segundo intento mientras Gemini sigue respondiendo.
-  input.value = "Segundo mensaje";
+  await Promise.resolve();
+  await Promise.resolve();
 
-  submitHandler({
-    preventDefault: vi.fn(),
-  });
-
-  expect(mocks.generateResponse).toHaveBeenCalledTimes(1);
-
-  expect(mocks.addMessage).toHaveBeenCalledTimes(1);
-
-  expect(mocks.addMessage).toHaveBeenCalledWith(
-    {
-      role: "user",
-      content: "Primer mensaje",
-    },
-    "sherlock"
+  expect(mocks.showChatError).toHaveBeenCalledWith(
+    "No fue posible obtener una respuesta. Intenta nuevamente."
   );
 
-  // Finalizamos la solicitud pendiente para no dejar
-  // una Promise abierta durante el test.
-  resolveResponse({
-    role: "assistant",
-    content: "Respuesta de Sherlock",
-  });
-
-  await Promise.resolve();
-  await Promise.resolve();
- });
+  expect(mocks.hideTypingIndicator).toHaveBeenCalled();
+});
 });

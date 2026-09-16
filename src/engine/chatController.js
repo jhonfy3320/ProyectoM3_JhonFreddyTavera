@@ -20,7 +20,9 @@ import {
 import {
   renderChat,
   showTypingIndicator,
-  hideTypingIndicator
+  hideTypingIndicator,
+  showChatError,
+  hideChatError,
 } from "../ui/chatRenderer.js";
 
 let chatState = "idle";
@@ -52,6 +54,8 @@ function handleSubmit(event) {
   const text = input.value.trim();
 
   if (!text) return;
+
+  hideChatError();
 
   const characterId = getActiveCharacterId();
 
@@ -104,6 +108,15 @@ async function generateAssistantMessage(characterId) {
   chatState = "error";
 
   renderChat();
+
+  const errorMessage =
+    error instanceof Error &&
+    typeof error.message === "string" &&
+    error.message.trim().length > 0
+      ? error.message
+      : "No fue posible obtener una respuesta. Intenta nuevamente.";
+
+  showChatError(errorMessage);
 
 } finally {
   hideTypingIndicator();

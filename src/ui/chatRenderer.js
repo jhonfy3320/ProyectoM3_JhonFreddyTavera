@@ -83,3 +83,34 @@ export function hideTypingIndicator() {
 function scrollToBottom(container) {
   container.scrollTop = container.scrollHeight;
 }
+/**
+ * Muestra un error recuperable dentro del chat.
+ *
+ * El mensaje se asigna mediante textContent para evitar
+ * interpretar contenido dinámico como HTML.
+ */
+export function showChatError(message) {
+  const container = document.getElementById("messages");
+
+  if (!container) return;
+
+  hideChatError();
+
+  const errorElement = document.createElement("div");
+
+  errorElement.id = "chat-error";
+  errorElement.className = "chat-error";
+  errorElement.setAttribute("role", "alert");
+  errorElement.textContent = message;
+
+  container.appendChild(errorElement);
+
+  scrollToBottom(container);
+}
+
+/**
+ * Elimina el error visible actual del chat.
+ */
+export function hideChatError() {
+  document.getElementById("chat-error")?.remove();
+}
