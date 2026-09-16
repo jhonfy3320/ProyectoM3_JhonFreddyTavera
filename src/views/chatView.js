@@ -130,27 +130,16 @@ export function chatView() {
             </header>
 
 
-            <!-- ==========================================
-                 CONVERSACIÓN
-                 ========================================== -->
+           <!-- ==========================================
+                              CONVERSACIÓN
+                ========================================== -->
 
-            <main
-                id="chatMessages"
-                class="chat-messages"
-            >
-            </main>
-
-
-            <!-- ==========================================
-                 MENSAJES
-                 ========================================== -->
-
-            <section
-                id="messages"
-                class="messages"
-                aria-live="polite"
-            >
-            </section>
+                <section
+                    id="messages"
+                    class="chat-messages messages"
+                    aria-live="polite"
+                >
+                </section>
 
 
             <!-- ==========================================
