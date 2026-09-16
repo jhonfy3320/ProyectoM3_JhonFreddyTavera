@@ -151,20 +151,25 @@ export function chatView() {
                 class="chat-form"
             >
 
-                <textarea
-                    id="chat-input"
-                    placeholder="Escribe un mensaje..."
-                    rows="3"
-                    aria-label="Escribe un mensaje"
-                ></textarea>
+                <div class="chat-form__input-wrapper">
 
-                <button
-                    type="submit"
-                    class="btn btn-primary"
-                >
-                    <span aria-hidden="true">➤</span>
-                    Enviar
-                </button>
+                    <textarea
+                        id="chat-input"
+                        class="chat-form__input"
+                        placeholder="Escribe tu mensaje..."
+                        rows="4"
+                        aria-label="Escribe un mensaje"
+                    ></textarea>
+
+                    <button
+                        type="submit"
+                        class="chat-form__send btn btn-primary"
+                        aria-label="Enviar mensaje"
+                    >
+                        <span aria-hidden="true">➤</span>
+                    </button>
+
+                </div>
 
             </form>
 

@@ -49,4 +49,27 @@ describe("Chat View DOM", () => {
     expect(html).toContain('class="chat-messages messages"');
     expect(html).toContain('aria-live="polite"');
   });
+  it("debe renderizar un composer amplio, accesible y responsive", () => {
+  const html = chatView();
+
+  expect(html).toContain(
+    'class="chat-form__input-wrapper"'
+  );
+
+  expect(html).toContain(
+    'class="chat-form__input"'
+  );
+
+  expect(html).toContain(
+    'class="chat-form__send btn btn-primary"'
+  );
+
+  expect(html).toContain(
+    'rows="4"'
+  );
+
+  expect(html).toContain(
+    'aria-label="Enviar mensaje"'
+  );
+});
 });
