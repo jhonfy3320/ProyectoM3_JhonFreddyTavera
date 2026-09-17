@@ -21,11 +21,31 @@ import { aboutView } from "../views/aboutView.js";
 /**
  * Renderiza la vista correspondiente según la URL.
  */
+/**
+ * Sincroniza visual y semánticamente la navegación
+ * principal con la ruta actual.
+ */
+export function syncNavigationState(path) {
+  const normalizedPath = path === "/" ? "/home" : path;
+
+  const links = document.querySelectorAll(".navigation [data-link]");
+
+  links.forEach((link) => {
+    const href = link.getAttribute("href");
+    const isActive = href === normalizedPath;
+
+    link.classList.toggle("active", isActive);
+
+    if (isActive) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+}
 export function router() {
   const app = document.getElementById("app");
   const path = window.location.pathname;
-  
-  console.log("📍 Ruta actual:", path);
 
   switch (path) {
     case "/":
@@ -49,8 +69,9 @@ export function router() {
         </section>
       `;
   }
-}
 
+  syncNavigationState(path);
+}
 /**
  * ==========================================================
  * Cambia la URL sin recargar la página.

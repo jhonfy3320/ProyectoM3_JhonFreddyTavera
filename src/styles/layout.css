@@ -157,7 +157,8 @@ button {
 }
 
 /* Active / ruta seleccionada */
-.navigation a.active {
+.navigation a.active,
+.navigation a[aria-current="page"] {
   color: #ffffff;
   background: var(--color-primary);
   box-shadow: 0 5px 18px rgba(124, 58, 237, 0.3);
