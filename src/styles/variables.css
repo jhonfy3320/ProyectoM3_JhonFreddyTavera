@@ -4,67 +4,153 @@
    Mobile First
    ====================================================== */
 
+/* ======================================================
+   HeroVerse AI - Design System (variables.css)
+   ====================================================== */
+
 :root {
-    /* ==========================================
-       Colores principales
-    ========================================== */
-    --color-primary: #7C3AED;
-    --color-primary-dark: #5B21B6;
-    --color-secondary: #F97316;
-    --color-background: #0F172A;
-    --color-surface: #1E293B;
-    --color-text: #F8FAFC;
-    --color-text-secondary: #CBD5E1;
-    --color-success: #22C55E;
-    --color-error: #EF4444;
-    --color-border: #334155;
+  /* ==========================================
+     Brand
+     ========================================== */
+  --color-brand: #8b5cf6;
+  --color-brand-light: #a78bfa;
+  --color-brand-dark: #6d28d9;
 
-    /* ==========================================
-     Tipografías
-    ========================================== */
+  --color-accent: #38bdf8;
+  --color-highlight: #f59e0b;
 
-    --font-title: 'Orbitron', sans-serif;
-    --font-body: 'Inter', sans-serif;
+  /* Compatibilidad */
+  --color-primary: var(--color-brand);
+  --color-primary-dark: var(--color-brand-dark);
+  --color-secondary: var(--color-accent);
 
-    /* ==========================================
-     Tamaños de fuente
-    ========================================== */
+  /* ==========================================
+     Background / Surfaces
+     ========================================== */
+  --color-background: #070b17;
+  --color-background-soft: #0b1120;
 
-    --fs-xs: .75rem;
-    --fs-sm: .875rem;
-    --fs-md: 1rem;
-    --fs-lg: 1.25rem;
-    --fs-xl: 1.75rem;
-    --fs-xxl: 2,5rem;
+  --color-surface: #111827;
+  --color-surface-elevated: #172033;
+  --color-surface-soft: rgba(30, 41, 59, 0.68);
+  --color-surface-glass: rgba(15, 23, 42, 0.72);
 
-    /* ==========================================
-     Espaciados
-    ========================================== */
-    --space-xs: .25rem;
-    --space-sm: .5rem;
-    --space-md: 1rem;
-    --space-lg: 1.5rem;
-    --space-xl: 2rem;
-    --space-xxl: 3rem;
+  /* ==========================================
+     Text
+     ========================================== */
+  --color-text: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #94a3b8;
 
-    /* ==========================================
-        Bordes
-    ========================================== */
-    --radius-sm: .5rem;
-    --radius-md: .75rem;
-    --radius-lg: 1rem;
-    --radius-xl: 1.5rem;
+  /* ==========================================
+     Semantic
+     ========================================== */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
 
-    /* ==========================================
-        Sombras
-    ========================================== */
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, .25);
-    --shadow-md: 0 8px 20px rgba(0, 0, 0, .35);
-    --shadow-lg: 0 15px 35px rgba(0, 0, 0, .45);
+  --color-border: #293548;
+  --color-border-soft: rgba(148, 163, 184, 0.14);
 
-    /* ==========================================
-        Transiciones
-    ========================================== */
-    --transition: all .3s ease;
+  /* ==========================================
+     Characters
+     ========================================== */
+  --character-sherlock: #38bdf8;
+  --character-sherlock-dark: #1d4ed8;
 
+  --character-captain: #ef4444;
+  --character-captain-secondary: #2563eb;
+
+  --character-jack: #f59e0b;
+  --character-jack-dark: #92400e;
+
+  /* ==========================================
+     Gradients
+     ========================================== */
+  --gradient-brand: linear-gradient(
+    135deg,
+    #8b5cf6 0%,
+    #6366f1 45%,
+    #38bdf8 100%
+  );
+
+  --gradient-hero: radial-gradient(
+    circle at 50% 0%,
+    rgba(139, 92, 246, 0.22),
+    transparent 42%
+  );
+
+  --gradient-app: 
+    radial-gradient(circle at 15% 0%, rgba(124, 58, 237, 0.14), transparent 30%),
+    radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.08), transparent 28%),
+    #070b17;
+
+  --gradient-surface: linear-gradient(
+    145deg,
+    rgba(30, 41, 59, 0.92),
+    rgba(15, 23, 42, 0.96)
+  );
+
+  /* ==========================================
+     Typography
+     ========================================== */
+  --font-title: "Orbitron", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.75rem;
+  --fs-xxl: 2.5rem;
+
+  /* ==========================================
+     Font weights
+     ========================================== */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-black: 800;
+
+  /* ==========================================
+     Spacing
+     ========================================== */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-xxl: 3rem;
+  --space-section: 5rem;
+
+  /* ==========================================
+     Radius
+     ========================================== */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-pill: 999px;
+
+  /* ==========================================
+     Shadows
+     ========================================== */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.18);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.38);
+  --shadow-glow: 0 0 32px rgba(139, 92, 246, 0.24);
+  --shadow-accent: 0 0 24px rgba(56, 189, 248, 0.18);
+
+  /* ==========================================
+     Focus
+     ========================================== */
+  --focus-ring: 0 0 0 3px rgba(56, 189, 248, 0.35);
+
+  /* ==========================================
+     Motion
+     ========================================== */
+  --transition-fast: 0.15s ease;
+  --transition: 0.3s ease;
+  --transition-slow: 0.45s ease;
 }
