@@ -65,6 +65,42 @@
   --character-jack-dark: #92400e;
 
   /* ==========================================
+   Aurora / ambient colors
+========================================== */
+
+--color-aurora-purple: #7607c0;
+--color-aurora-cyan: #3ff8ca;
+--color-aurora-magenta: #d91757;
+--color-aurora-orange: #eb9d1e;
+--color-aurora-green: #61ea88;
+
+/* ==========================================
+   Aurora glows
+========================================== */
+
+--aurora-purple-glow:
+  rgba(118, 7, 192, 0.22);
+
+--aurora-cyan-glow:
+  rgba(63, 248, 202, 0.13);
+
+--aurora-magenta-glow:
+  rgba(217, 23, 87, 0.10);
+
+/* ==========================================
+   Character glows
+========================================== */
+
+--character-sherlock-glow:
+  rgba(56, 189, 248, 0.22);
+
+--character-captain-glow:
+  rgba(239, 68, 68, 0.20);
+
+--character-jack-glow:
+  rgba(245, 158, 11, 0.20);
+
+  /* ==========================================
      Gradients
      ========================================== */
   --gradient-brand: linear-gradient(
@@ -154,3 +190,4 @@
   --transition: 0.3s ease;
   --transition-slow: 0.45s ease;
 }
+

@@ -1,10 +1,11 @@
 /* ======================================================
    HeroVerse AI
    Archivo principal de estilos
+   @import url(./design-system.css);
    ====================================================== */
 
 /* Variables globales */
 @import url(./variables.css);
 @import url(./layout.css);
 @import url(./components.css);
-@import url(./characters.css);
+@import url(./characters.css); 

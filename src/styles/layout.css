@@ -33,6 +33,60 @@ body {
   color: var(--color-text);
   font-family: var(--font-body);
   line-height: 1.6;
+  position: relative;
+  isolation: isolate;
+  overflow-x: hidden;
+}
+/* ==========================================
+   HeroVerse ambient aurora
+========================================== */
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Aurora principal */
+body::before {
+  inset: -20%;
+  background:
+    radial-gradient(
+      circle at 18% 28%,
+      var(--aurora-purple-glow),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 82% 65%,
+      var(--aurora-cyan-glow),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 60% 10%,
+      var(--aurora-magenta-glow),
+      transparent 28%
+    );
+  filter: blur(65px);
+  transform: translate3d(0, 0, 0);
+  animation: heroVerseAurora 20s ease-in-out infinite alternate;
+}
+
+/* Pulso atmosférico */
+body::after {
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(139, 92, 246, 0.035),
+    transparent 42%,
+    rgba(56, 189, 248, 0.035)
+  );
+  animation: heroVersePulse 14s ease-in-out infinite alternate;
+}
+.app-container {
+  position: relative;
+  z-index: 1;
 }
 
 /* ==========================================
@@ -383,6 +437,29 @@ main {
   width: 100%;
   margin: 0 auto;
 }
+@keyframes heroVerseAurora {
+  0% {
+    transform: translate3d(-3%, -2%, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(3%, 2%, 0) scale(1.06);
+  }
+
+  100% {
+    transform: translate3d(-2%, 4%, 0) scale(1.03);
+  }
+}
+
+@keyframes heroVersePulse {
+  from {
+    opacity: 0.48;
+  }
+
+  to {
+    opacity: 0.95;
+  }
+}
 
 /* ==========================================
    Desktop
@@ -428,5 +505,25 @@ main {
   .chat-messages {
     min-height: 400px;
     padding: 0.25rem;
+  }
+}
+@media (max-width: 600px) {
+  body::before {
+    inset: -10%;
+    filter: blur(45px);
+    opacity: 0.72;
+    animation-duration: 26s;
+  }
+
+  body::after {
+    opacity: 0.65;
+  }
+}
+@media (
+  prefers-reduced-motion: reduce
+) {
+  body::before,
+  body::after {
+    animation: none;
   }
 }

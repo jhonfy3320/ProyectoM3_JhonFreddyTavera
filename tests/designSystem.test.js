@@ -57,4 +57,47 @@ describe("HeroVerse design system", () => {
     expect(charactersCss).toContain("var(--character-captain)");
     expect(charactersCss).toContain("var(--character-jack)");
   });
+  it("debe definir los colores ambientales de la aurora", () => {
+  expect(variablesCss).toContain(
+    "--color-aurora-purple:"
+  );
+
+  expect(variablesCss).toContain(
+    "--color-aurora-cyan:"
+  );
+
+  expect(variablesCss).toContain(
+    "--color-aurora-magenta:"
+  );
+});
+
+it("debe implementar una aurora global animada", () => {
+  expect(layoutCss).toMatch(
+    /body::before/
+  );
+
+  expect(layoutCss).toContain(
+    "@keyframes heroVerseAurora"
+  );
+});
+
+it("debe respetar la preferencia de reducción de movimiento", () => {
+  expect(layoutCss).toContain(
+    "prefers-reduced-motion: reduce"
+  );
+});
+
+it("debe definir glows independientes para los personajes", () => {
+  expect(variablesCss).toContain(
+    "--character-sherlock-glow:"
+  );
+
+  expect(variablesCss).toContain(
+    "--character-captain-glow:"
+  );
+
+  expect(variablesCss).toContain(
+    "--character-jack-glow:"
+  );
+ });
 });
