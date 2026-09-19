@@ -37,4 +37,20 @@ describe("HeroVerse content layout", () => {
     expect(aboutView).toContain('class="architecture-flow"');
     expect(componentsCss).toMatch(/\.about-grid\s*\{/);
   });
+  it("debe explicar las funcionalidades principales de HeroVerse", () => {
+  expect(homeView).toContain("conversación independiente");
+  expect(homeView).toContain("Google Gemini");
+  expect(homeView).toContain("Serverless Function");
+});
+
+ it("debe incluir enlaces técnicos externos seguros", () => {
+  expect(aboutView).toContain("ai.google.dev/gemini-api/docs");
+  expect(aboutView).toContain("github.com/jhonfy3320/HeroVerse-AI");
+  expect(aboutView).toContain('rel="noopener noreferrer"');
+});
+
+ it("debe obtener los perfiles desde la fuente central de personajes", () => {
+  expect(aboutView).toContain('from "../characters/characters.js"');
+  expect(aboutView).toContain("characterProfiles");
+});
 });

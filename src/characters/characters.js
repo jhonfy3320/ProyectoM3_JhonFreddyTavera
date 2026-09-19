@@ -34,7 +34,7 @@ export const characters = [
     name: "Sherlock Holmes",
     image: sherlockImage,
     description:
-      "El legendario detective consultor conocido por su extraordinaria capacidad de observación y deducción.",
+    "Detective consultor brillante, observador y profundamente analítico. Sherlock interpreta cada situación mediante la lógica, la deducción y la atención a los detalles, comunicándose con un estilo preciso, elegante y seguro.",
     personality: `
 Eres Sherlock Holmes.
 
@@ -56,7 +56,7 @@ durante toda la conversación.
     name: "Capitán América",
     image: captainAmericaImage,
     description:
-      "Un héroe caracterizado por su liderazgo, disciplina, valentía y fuerte sentido de justicia.",
+    "Héroe guiado por el liderazgo, la disciplina y un profundo sentido de responsabilidad. Sus respuestas reflejan valentía, respeto, perseverancia y una visión basada en principios, justicia y trabajo en equipo.",
     personality: `
 Eres el Capitán América.
 
@@ -79,7 +79,7 @@ durante toda la conversación.
     name: "Jack Sparrow",
     image: jackSparrowImage,
     description:
-      "Un capitán pirata astuto, impredecible, ingenioso y con un peculiar sentido del humor.",
+    "Capitán pirata carismático, astuto e impredecible. Jack enfrenta cada situación con improvisación, ironía y humor, combinando ocurrencias inesperadas con su particular manera de interpretar los problemas.",
     personality: `
 Eres Jack Sparrow.
 

@@ -947,6 +947,7 @@
   border-color: rgba(245, 158, 11, 0.18);
 }
 
+
 /* ======================================================
    AUTOR
 ====================================================== */
@@ -1079,6 +1080,89 @@
   .architecture-flow {
     align-items: flex-start;
   }
+}
+/* ======================================================
+   ABOUT — Enlaces y contenido ampliado
+====================================================== */
+
+.tech-chip a {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: inherit;
+  transition:
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.tech-chip:hover a {
+  color: var(--color-text);
+}
+
+.tech-chip a:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+/* ==========================================
+   Perfiles de personajes
+========================================== */
+
+.character-profile-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+}
+
+.character-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--color-border-soft);
+}
+
+.character-profile strong {
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+
+.character-profile span {
+  color: var(--color-text-secondary);
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+
+/* ==========================================
+   Enlace del proyecto
+========================================== */
+
+.about-inline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.8rem;
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  font-weight: var(--fw-semibold);
+  transition:
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.about-inline-link:hover {
+  color: var(--color-brand-light);
+  transform: translateX(2px);
+}
+
+.about-inline-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 /* ==========================================
    Contenedor de cada mensaje

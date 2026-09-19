@@ -32,10 +32,12 @@ export function CharacterSelector(selectedCharacterId = null) {
           HEROES & LEGENDS
         </span>
         <h2 class="character-selector__title">
-          Elige tu personaje
+          Elige tu personaje favorito
         </h2>
         <p class="character-selector__description">
-          Selecciona con quién quieres comenzar tu conversación.
+          Cada personaje posee una personalidad, estilo y contexto
+          propios. Elige con quién quieres comenzar y cambia de
+          personaje cuando quieras sin mezclar las conversaciones.
         </p>
       </div>
 
