@@ -24,9 +24,9 @@
  * Es la fuente única de verdad de los personajes.
  * ==========================================================
  */
-import sherlockImage from "../assets/characters/Holmes.webp";
-import captainAmericaImage from "../assets/characters/capitanamerica.jpg";
-import jackSparrowImage from "../assets/characters/Jacck.jpg";
+import sherlockImage from "../assets/characters/sherlock-holmes.webp";
+import captainAmericaImage from "../assets/characters/captain-america.jpg";
+import jackSparrowImage from "../assets/characters/jack-sparrow.jpg";
 
 export const characters = [
   {
