@@ -1131,11 +1131,18 @@ Esto permite identificar claramente el origen del enlace utilizado para acceder 
 
 ## Home
 
+![HeroVerse AI - Home](docs/screenshots/home1.png)
 ![HeroVerse AI - Home](docs/screenshots/home.png)
 
 ## About
 
 ![HeroVerse AI - About](docs/screenshots/about.png)
+![HeroVerse AI - About](docs/screenshots/about1.png)
+![HeroVerse AI - About](docs/screenshots/about2.png)
+
+## Chat
+
+![HeroVerse AI - Chat](docs/screenshots/chat.png)
 
 > Para reforzar todavía más la evidencia de funcionamiento, puede añadirse también una captura actual del chat conversando con uno de los personajes.
 
