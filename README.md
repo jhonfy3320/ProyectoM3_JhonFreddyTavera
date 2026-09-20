@@ -1,5 +1,7 @@
 # 🦸 HeroVerse AI
 
+[![HeroVerse CI](https://github.com/jhonfy3320/HeroVerse-AI/actions/workflows/ci.yml/badge.svg)](https://github.com/jhonfy3320/HeroVerse-AI/actions/workflows/ci.yml)
+
 > **Single Page Application conversacional con múltiples personajes impulsados por Google Gemini AI.**
 
 HeroVerse AI es una aplicación web interactiva desarrollada como proyecto integrador de **Full Stack Development**. Combina desarrollo frontend moderno, arquitectura modular, gestión de estado, navegación SPA, testing automatizado, Serverless Functions e Inteligencia Artificial generativa.
@@ -252,6 +254,14 @@ Incluye:
 -  Estados de foco accesibles. 
 -  Diseño responsive. 
 -  Adaptación específica para dispositivos móviles. 
+
+---
+
+## ✍️ Indicador de escritura y auto-scroll
+
+Durante la generación de una respuesta, el chat muestra el indicador **“Escribiendo…”** asociado al personaje activo.
+
+Además, el renderer mantiene automáticamente el scroll en el último mensaje para conservar el foco de la conversación.
 
 ---
 
@@ -761,17 +771,23 @@ Esto permite:
 
 ## Ejecutar toda la suite
 
-```
+```bash
 npm test -- --run
 ```
 
----
-
 ## Ejecutar un archivo específico
 
-```
+```bash
 npm test -- --run tests/apiChat.test.js
 ```
+
+## Quality Gate local
+
+```bash
+npm run validate
+```
+
+Este comando ejecuta los tests y, si todos pasan, genera el build de producción.
 
 ---
 
@@ -877,23 +893,24 @@ Para ejecutar HeroVerse localmente se necesita:
 
 ## 1. Clonar el repositorio
 
-```
+```bash
 git clone https://github.com/jhonfy3320/HeroVerse-AI.git
-```
-
-Entrar al proyecto:
-
-```
 cd HeroVerse-AI
 ```
 
----
-
 ## 2. Instalar dependencias
 
-```
+```bash
 npm install
 ```
+
+## 3. Instalar Vercel CLI
+
+```bash
+npm install -g vercel
+```
+
+También puede ejecutarse mediante `npx vercel` si no se desea una instalación global.
 
 ---
 
@@ -921,19 +938,41 @@ El archivo `.env.local` debe permanecer excluido mediante `.gitignore`.
 
 \<a id="ejecucion">\</a>
 
-# ▶️ Ejecución local
+# ▶️ Ejecución local con Vercel
 
-Inicia Vite con:
+HeroVerse utiliza una **Vercel Serverless Function** en `/api/chat`. Por esta razón, para probar localmente la aplicación completa —frontend + función serverless— se recomienda utilizar Vercel CLI.
 
+## 1. Vincular el repositorio con Vercel
+
+La primera vez:
+
+```bash
+vercel link
 ```
+
+Selecciona el proyecto de HeroVerse correspondiente.
+
+## 2. Iniciar el entorno local completo
+
+```bash
+vercel dev
+```
+
+Vercel CLI inicia el entorno local utilizando la estructura del proyecto y habilita el endpoint:
+
+```text
+/api/chat
+```
+
+### Ejecución alternativa solo del frontend
+
+Para trabajar únicamente sobre la interfaz Vite:
+
+```bash
 npm run dev
 ```
 
-La aplicación estará disponible normalmente en:
-
-```
-http://localhost:5173/
-```
+> Con `npm run dev` se ejecuta el frontend de Vite. Para validar también la Serverless Function, utiliza `vercel dev`.
 
 ---
 
@@ -963,11 +1002,15 @@ npm run build
 
 Los archivos optimizados se generan en:
 
-```
+```text
 dist/
 ```
 
 Antes de publicar cambios se recomienda ejecutar:
+
+```bash
+npm run validate
+```
 
 ```
 npm test -- --run
@@ -982,14 +1025,42 @@ Ambos comandos deben finalizar correctamente.
 
 # 🚀 Deployment en Vercel
 
-HeroVerse está preparado para ser desplegado mediante **Vercel**.
+HeroVerse está desplegado en Vercel y utiliza una función serverless en `/api/chat`.
 
-## Variable requerida
+## Opción A — Deployment conectado a GitHub
 
-Dentro de las variables de entorno del proyecto debe configurarse:
+1. Importa el repositorio `jhonfy3320/HeroVerse-AI` en Vercel.
+2. Configura el proyecto con la raíz del repositorio.
+3. En **Project → Settings → Environment Variables**, agrega:
 
-```
+```text
 GEMINI_API_KEY
+```
+
+4. Asigna la variable al entorno **Production** y, si corresponde, también a Preview/Development.
+5. Realiza un nuevo deployment después de guardar cambios en las variables.
+6. Los nuevos pushes a la rama conectada generan nuevos deployments automáticamente.
+
+## Opción B — Deployment con Vercel CLI
+
+Inicia sesión:
+
+```bash
+vercel login
+```
+
+Vincula el proyecto:
+
+```bash
+vercel link
+```
+
+Configura `GEMINI_API_KEY` desde el Dashboard de Vercel o mediante la gestión de variables de entorno de Vercel.
+
+Despliega a producción:
+
+```bash
+vercel deploy --prod
 ```
 
 ---
@@ -1051,6 +1122,64 @@ utm_campaign = heroverse_ai
 ```
 
 Esto permite identificar claramente el origen del enlace utilizado para acceder a la aplicación.
+
+---
+
+<a id="capturas"></a>
+
+# 📸 Capturas de pantalla
+
+## Home
+
+![HeroVerse AI - Home](docs/screenshots/home.png)
+
+## About
+
+![HeroVerse AI - About](docs/screenshots/about.png)
+
+> Para reforzar todavía más la evidencia de funcionamiento, puede añadirse también una captura actual del chat conversando con uno de los personajes.
+
+---
+
+<a id="registro-ia"></a>
+
+# 🤖 Registro del uso de Inteligencia Artificial
+
+La Inteligencia Artificial se utilizó en HeroVerse AI tanto como **funcionalidad central de la aplicación** como herramienta de apoyo durante el proceso de desarrollo.
+
+## Google Gemini AI dentro de la aplicación
+
+Google Gemini es el motor generativo utilizado para producir las respuestas de los personajes.
+
+Su integración se realiza a través de la Serverless Function `/api/chat`, donde:
+
+- Se recibe el `characterId`.
+- Se valida el historial.
+- Se selecciona el `System Prompt` correspondiente.
+- Se transforma el historial al formato esperado por Gemini.
+- Se genera la respuesta.
+- Se devuelve al frontend una respuesta normalizada.
+
+La clave `GEMINI_API_KEY` permanece en el entorno del servidor y no se expone al navegador.
+
+## Uso de IA como apoyo durante el desarrollo
+
+Durante la construcción, auditoría y mejora de HeroVerse AI se utilizaron herramientas de IA, incluido ChatGPT, como apoyo para:
+
+- Analizar la arquitectura del proyecto.
+- Identificar errores y posibles regresiones.
+- Revisar la separación de responsabilidades.
+- Diseñar y ampliar casos de prueba.
+- Analizar errores producidos durante testing.
+- Revisar buenas prácticas de seguridad.
+- Mejorar la documentación técnica.
+- Analizar la experiencia de usuario y el diseño responsive.
+- Revisar la integración entre frontend, Serverless Functions y Gemini.
+- Proponer refactorizaciones que posteriormente fueron comprobadas mediante tests y build.
+
+Las decisiones finales, implementación, validación, ejecución de pruebas y control de versiones fueron verificadas dentro del proyecto mediante **Vitest**, builds de producción, revisión manual y GitHub Actions.
+
+La IA se utilizó como herramienta de asistencia y aprendizaje, no como sustituto de las validaciones técnicas del proyecto.
 
 ---
 
@@ -1137,7 +1266,7 @@ El contenido generado dinámicamente se procesa antes de insertarse en la interf
 
 Los estilos se dividen según responsabilidad:
 
-```
+```text
 variables.css
 layout.css
 components.css
@@ -1247,7 +1376,7 @@ https://github.com/jhonfy3320/HeroVerse-AI
 
 # 👨‍💻 Autor
 
-## Freddy Tavera
+## JhonFreddy Tavera Blandon
 
 Estudiante de **Ingeniería Informática**, con formación orientada al desarrollo de software, desarrollo Full Stack, Data Science e Inteligencia Artificial.
 
@@ -1319,9 +1448,10 @@ Actualmente HeroVerse AI cuenta con:
 
 Antes de considerar una versión lista para producción:
 
-```
+```bash
 npm test -- --run
 npm run build
+npm run validate
 git diff --check
 ```
 
