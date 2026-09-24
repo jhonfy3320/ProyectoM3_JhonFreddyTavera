@@ -137,15 +137,13 @@ button {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: var(--color-surface-glass);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: var(--color-background-soft);
   padding: 0.9rem 1.5rem;
   border-bottom: 1px solid var(--color-border-soft);
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 40px rgba(33, 17, 126, 0.34);
 }
 
 /* ==========================================
@@ -168,7 +166,7 @@ button {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0 0 30px rgba(139, 92, 246, 0.15);
+  text-shadow: 0 0 30px rgba(60, 11, 174, 0.234);
 }
 
 .logo span {
